@@ -1,6 +1,11 @@
 import React from "react";
 import styles from "./Register.module.css";
+import { useNavigate } from "react-router-dom";
 function Register() {
+  const navigate = useNavigate();
+  function redirectToLoginPage() {
+    navigate("/");
+  }
   return (
     <>
       <form>
@@ -11,7 +16,9 @@ function Register() {
         <button className={styles.register}>Register</button>
         <span>Already user ?</span>
         <hr />
-        <button className={styles.signIn}>Sign in</button>
+        <button className={styles.signIn} onClick={redirectToLoginPage}>
+          Sign in
+        </button>
       </form>
     </>
   );
