@@ -1,0 +1,13 @@
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: #456;
+}
+.sidebar {
+  width: 20vw;
+  height: 100vh;
+  position: sticky;
+  top: 0px;
+  background-color: #fefefe;
+}
