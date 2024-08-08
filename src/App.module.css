@@ -1,17 +1,34 @@
+.main {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #8d929d;
+}
+
 .mainContainer {
   width: 100vw;
   height: 100vh;
   display: flex;
-  background: #456;
+  flex-direction: column;
+  /* background: #456; */
 }
 .sidebar {
-  width: 20vw;
+  width: 20%;
   height: 100vh;
   position: sticky;
   top: 0px;
   background-color: #fefefe;
+  display: none;
 }
 .rightContainer {
-  flex-grow: 1;
+  flex: 1 1 0%;
   overflow-y: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .mainContainer {
+    flex-direction: row;
+  }
+  .sidebar {
+    display: block;
+  }
 }

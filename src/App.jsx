@@ -29,7 +29,7 @@ function Layout() {
 
 function App() {
   return (
-    <>
+    <main className={styles.main}>
       <Routes>
         <Route element={<Layout />}>
           <Route index path="/" element={<Navigate to="/dashboard" />} />
@@ -39,7 +39,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-    </>
+    </main>
   );
 }
 

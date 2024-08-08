@@ -3,15 +3,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px 0px;
+  gap: 30px;
 }
 .heading {
   display: flex;
   align-items: center;
-  gap: 0px 10px;
+  gap: 10px;
   padding: 10px;
 }
 .heading span {
+  width: auto;
   font-weight: bold;
   color: #111;
   font-size: 30px;
@@ -29,14 +30,13 @@
 .linksContainer {
   display: flex;
   flex-direction: column;
-  padding: 0rem 2rem;
-  flex-grow: 1;
+  padding: 1rem 2rem;
   gap: 0.8rem 0rem;
 }
 .link {
-  width: 75%;
+  width: auto;
   display: flex;
-  gap: 1rem;
+  gap: 8px;
   padding: 6px 12px;
   border-radius: 9999px;
   align-items: center;
@@ -54,4 +54,10 @@
 .active {
   background-color: #2564ed;
   color: #fffdfd;
+}
+
+@media screen and (min-width: 1024px) {
+  .link {
+    width: 75%;
+  }
 }

@@ -1,5 +1,5 @@
 .navbar {
-  width: 100%;
+  /* width: 100%; */
   background-color: #fefefe;
   display: flex;
   justify-content: space-between;
@@ -8,21 +8,24 @@
   position: sticky;
   top: 0px;
   z-index: 5;
+  gap: 16px;
 }
 
 .inputContainer {
   display: flex;
+  align-items: center;
   gap: 16px;
 }
 
 .hamberger {
-  font-size: 24px;
-  line-height: 32px;
-  color: #656565;
-
+  background-color: #fdfdfd;
+  border: none;
+  text-align: center;
+  padding: 10px;
   /* media query */
-  display: none;
+  display: block;
 }
+
 .searchContainer {
   width: 256px;
   display: flex;
@@ -49,5 +52,14 @@
   outline: none;
 }
 
-@media screen and (max-width: 576px) {
+.navbar_right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .hamberger {
+    display: none;
+  }
 }
