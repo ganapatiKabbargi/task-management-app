@@ -11,3 +11,7 @@
   top: 0px;
   background-color: #fefefe;
 }
+.rightContainer {
+  flex-grow: 1;
+  overflow-y: auto;
+}
