@@ -1,6 +1,6 @@
 .mobileSidebarContainer {
   background-color: #ffffff;
-  width: 80%;
+  width: 75%;
   height: 100%;
   z-index: 10;
   text-align: right;
@@ -23,11 +23,25 @@
 
 .closeBtn {
   background: none;
-  background-color: #d6cfcf;
   border: none;
   outline: none;
-  box-shadow: none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   cursor: pointer;
+  position: relative;
+  top: 20px;
+  right: 20px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: black;
+  opacity: 0.2;
+  z-index: 6;
 }
 @media screen and (min-width: 768px) {
   .mobileSidebarContainer {

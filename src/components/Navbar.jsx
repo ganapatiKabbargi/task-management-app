@@ -3,11 +3,18 @@ import styles from "./Navbar.module.css";
 import { MdOutlineSearch } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Avatar from "./Avatar";
+import { useDispatch } from "react-redux";
+import { openSideBar } from "../store/authSlice";
 function Navbar() {
+  const dispatch = useDispatch();
+
+  function openSidebarHandler() {
+    dispatch(openSideBar());
+  }
   return (
     <nav className={styles.navbar}>
       <div className={styles.inputContainer}>
-        <button className={styles.hamberger}>
+        <button className={styles.hamberger} onClick={openSidebarHandler}>
           <RxHamburgerMenu className={styles.ham_icon} />
         </button>
         <div className={styles.searchContainer}>

@@ -2,25 +2,29 @@ import React from "react";
 import { useState } from "react";
 import styles from "./MobileSidebar.module.css";
 import Sidebar from "./Sidebar";
+import { useSelector, useDispatch } from "react-redux";
+import { closeSideBar } from "../store/authSlice";
 
 function MobileSidebar() {
-  const [isOpen, setIsOpen] = useState(true);
-
+  const isOpen = useSelector((state) => state.auth.isSidebarOpen);
+  const dispatch = useDispatch();
   function closeSidebarHandler() {
-    setIsOpen(false);
+    dispatch(closeSideBar());
   }
   return (
     <>
+      {isOpen && (
+        <div className={styles.backdrop} onClick={closeSidebarHandler}></div>
+      )}
       <div
         className={`${styles.mobileSidebarContainer} ${
           isOpen ? styles.open : styles.close
         }`}
       >
-        <div className={styles.btnContainer}>
-          <button className={styles.closeBtn} onClick={closeSidebarHandler}>
-            X
-          </button>
-        </div>
+        <button className={styles.closeBtn} onClick={closeSidebarHandler}>
+          X
+        </button>
+
         <Sidebar />
       </div>
     </>
