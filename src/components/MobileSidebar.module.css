@@ -1,0 +1,36 @@
+.mobileSidebarContainer {
+  background-color: #ffffff;
+  width: 80%;
+  height: 100%;
+  z-index: 10;
+  text-align: right;
+  font-weight: 800;
+  position: absolute;
+  top: 0px;
+  left: -350px;
+  opacity: 0;
+  transition: all 0.8s ease-in-out;
+  display: block;
+}
+.open {
+  transform: translateX(350px);
+  opacity: 1;
+}
+.close {
+  transform: translateX(-350px);
+  opacity: 0;
+}
+
+.closeBtn {
+  background: none;
+  background-color: #d6cfcf;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .mobileSidebarContainer {
+    display: none;
+  }
+}

@@ -52,7 +52,7 @@ function Sidebar() {
                 path === el.link.split("/")[0] ? styles.active : ""
               }`}
             >
-              {el.icon}
+              <span>{el.icon}</span>
               <span>{el.label}</span>
             </Link>
           );

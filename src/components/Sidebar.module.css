@@ -12,10 +12,10 @@
   padding: 10px;
 }
 .heading span {
-  width: auto;
+  max-width: 200px;
   font-weight: bold;
   color: #111;
-  font-size: 30px;
+  font-size: 20px;
 }
 .heading p {
   background-color: #27689a;
@@ -30,20 +30,16 @@
 .linksContainer {
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-  gap: 0.8rem 0rem;
+  padding: 1rem;
+  gap: 0.8rem;
 }
 .link {
-  width: auto;
   display: flex;
   gap: 8px;
   padding: 6px 12px;
   border-radius: 9999px;
   align-items: center;
   color: rgb(62, 62, 62);
-
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 .link:hover {
   background-color: #2564ed2d;
@@ -58,6 +54,16 @@
 
 @media screen and (min-width: 1024px) {
   .link {
-    width: 75%;
+    width: 60%;
+  }
+}
+@media screen and (min-width: 768px) and(max-width: 1024px) {
+  .link {
+    min-width: 80%;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .link {
+    width: 40%;
   }
 }

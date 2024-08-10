@@ -1,4 +1,5 @@
 import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from "./App.module.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -6,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
 import Tasks from "./components/Tasks";
 import Navbar from "./components/Navbar";
+import MobileSidebar from "./components/MobileSidebar";
 
 function Layout() {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ function Layout() {
       <div className={styles.sidebar}>
         <Sidebar />
       </div>
+      <MobileSidebar />
       <div className={styles.rightContainer}>
         <Navbar />
         <div className={styles.outlet}>
