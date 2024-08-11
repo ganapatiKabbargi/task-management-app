@@ -5,6 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Avatar from "./Avatar";
 import { useDispatch } from "react-redux";
 import { openSideBar } from "../store/authSlice";
+import Notification from "./Notification";
 function Navbar() {
   const dispatch = useDispatch();
 
@@ -27,6 +28,7 @@ function Navbar() {
         </div>
       </div>
       <div className={styles.navbar_right}>
+        <Notification />
         <Avatar />
       </div>
     </nav>

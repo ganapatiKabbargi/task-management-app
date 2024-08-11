@@ -6,13 +6,12 @@ import { Menu, Transition } from "@headlessui/react";
 import styles from "./Avatar.module.css";
 function Avatar() {
   return (
-    <div>
+    <>
       <Menu as="div" className={styles.menu}>
-        <div>
-          <Menu.Button className={styles.menu_button}>
-            <span>RS</span>
-          </Menu.Button>
-        </div>
+        <Menu.Button className={styles.menu_button}>
+          <span>R</span>
+        </Menu.Button>
+
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
@@ -61,7 +60,7 @@ function Avatar() {
           </Menu.Items>
         </Transition>
       </Menu>
-    </div>
+    </>
   );
 }
 

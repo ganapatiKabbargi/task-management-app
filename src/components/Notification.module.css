@@ -1,0 +1,97 @@
+.popover {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popoverBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #edebeb;
+  border: none;
+  outline: none;
+  padding: 0px;
+  border-radius: 9999px;
+}
+.popoverBtn:focus {
+  outline: none;
+}
+.notificationIconContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+.panelContainer {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  margin-top: 20px;
+  max-width: 384px;
+  width: 100vw;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+}
+.panelItem {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 5px;
+  gap: 5px;
+  border-radius: 8px;
+  width: 100%;
+}
+.panelItem:hover {
+  background-color: #ebe7e7;
+}
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+}
+.iconContainer:hover .alertIcon {
+  color: #e28e28;
+}
+.detailsContainer {
+  margin-left: 5px;
+}
+.name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #333;
+}
+.description {
+  font-size: 14px;
+  color: #6e6e6e;
+  line-height: 20px;
+}
+@media screen and (max-width: 768px) {
+  .iconContainer {
+    width: 40px;
+    height: 40px;
+  }
+  .panelContainer {
+    margin-top: 50px;
+    max-width: 300px;
+    right: 0px;
+  }
+}
