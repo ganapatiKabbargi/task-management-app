@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
-import Tasks from "./components/Tasks";
+import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
 import MobileSidebar from "./components/MobileSidebar";
 

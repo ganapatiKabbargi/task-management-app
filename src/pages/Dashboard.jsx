@@ -77,7 +77,7 @@ function TaskTable({ tasks }) {
             })}
           </div>
         </td>
-        <td className={styles.tableDescription}>
+        <td className={styles.createdAtDescription}>
           <div className={styles.description}>
             <span>{moment(task.date).fromNow()}</span>
           </div>
@@ -145,7 +145,7 @@ function Dashboard() {
         <Chart />
       </div>
       <div className={styles.tasksContainer}>
-        <div style={{ width: "100%" }}>
+        <div className={styles.tasksTable}>
           <TaskTable tasks={summary.last10Task} />
         </div>
       </div>
