@@ -1,0 +1,91 @@
+.popover {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popoverBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0px;
+  border-radius: 9999px;
+}
+.popoverBtn:focus {
+  outline: none;
+}
+.notificationIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ececec;
+}
+.panelContainer {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  max-width: 284px;
+  width: 100vw;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 10px 15px 3px rgb(0 0 0 / 0.1), 0 4px 6px 4px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #0c0c0c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.role {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #3d3d3d;
+}
+.email {
+  font-size: 14px;
+  color: #153bfb;
+  line-height: 20px;
+}
+.team {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  line-height: 20px;
+}
+@media screen and (max-width: 768px) {
+  .iconContainer {
+    width: 40px;
+    height: 40px;
+  }
+  .panelContainer {
+    margin-top: 50px;
+    max-width: 300px;
+    right: 0px;
+  }
+}

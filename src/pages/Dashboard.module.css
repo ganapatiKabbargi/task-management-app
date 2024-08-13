@@ -1,0 +1,120 @@
+.dashboardContainer {
+  height: 100%;
+  padding: 16px;
+  background: white;
+}
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px;
+}
+.chartContainer {
+  background-color: white;
+  margin: 54px 10px;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.chartHeading {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: rgb(75 85 99);
+}
+.tasksContainer {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  padding: 32px 0px;
+  box-sizing: border-box;
+}
+.tableHead {
+  border-bottom-width: 1px;
+  border-color: rgb(209 213 219);
+  /* background-color: #7c4747; */
+}
+.tableRow {
+  text-align: left;
+}
+.tableHeading {
+  padding: 8px 0px;
+}
+.createdAt {
+  padding: 8px 0px;
+  display: block;
+}
+.tableContainer {
+  width: 67%;
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.taskRow {
+  border-bottom-width: 1px;
+  border-color: rgb(209 213 219);
+  color: rgb(75 85 99);
+}
+.taskRow:hover {
+  background-color: rgb(203 213 225);
+}
+.tableDescription {
+  padding: 4px 0px;
+}
+.taskDetailContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.taskDetail {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+}
+.taskTitle {
+  font-size: 16px;
+  line-height: 24px;
+  color: rgb(3, 3, 3);
+}
+.taskDescription {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.description {
+  display: flex;
+  gap: 4px;
+}
+.priorityIcon {
+  font-size: 18px;
+  line-height: 28px;
+}
+.team {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: -4px;
+}
+@media screen and (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+  .tasksContainer {
+    flex-direction: column;
+  }
+  .createdAt {
+    display: none;
+  }
+  .tableContainer {
+    width: 100%;
+    padding: 8px 4px;
+  }
+}
