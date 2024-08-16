@@ -9,6 +9,7 @@ import {
   MdList,
 } from "react-icons/md";
 import { BiMessageAltDetail } from "react-icons/bi";
+import { BsThreeDots } from "react-icons/bs";
 import UserDetail from "./UserDetail";
 function TaskCard({ task }) {
   const icons = {
@@ -35,6 +36,11 @@ function TaskCard({ task }) {
             >
               {task.priority} Priority
             </span>
+          </div>
+          <div className={styles.dots}>
+            <button className={styles.threeDots}>
+              <span>{<BsThreeDots />}</span>
+            </button>
           </div>
         </div>
         <>

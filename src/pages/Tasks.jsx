@@ -11,6 +11,8 @@ import TaskTitle from "../components/TaskTitle";
 import BoardView from "../components/BoardView";
 import { tasks } from "../utils/data";
 import Table from "../components/Table";
+import AddTask from "../components/AddTask";
+
 const tabs = [
   { title: "Board View", icon: <MdGridView /> },
   { title: "List View", icon: <FaList /> },
@@ -21,10 +23,16 @@ const TASK_TYPE = {
   "in progress": "rgb(202 138 4)",
   completed: "rgb(22 163 74)",
 };
+
 function Tasks() {
   const params = useParams();
   const status = params?.status || "";
   const [selected, setSelected] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState("");
+
+  console.log(selectedTask);
+
   return (
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
@@ -34,6 +42,9 @@ function Tasks() {
             label="Create Task"
             icon={<IoMdAdd style={{ fontSize: "18px", color: "white" }} />}
             className={styles.addTaskBtn}
+            onClick={() => {
+              setOpen(true);
+            }}
           />
         )}
       </div>
@@ -41,19 +52,32 @@ function Tasks() {
         <Tabs tabs={tabs} setSelected={setSelected}>
           {!status && (
             <div className={styles.taskTitleContainer}>
-              <TaskTitle label="To Do" bg={TASK_TYPE.todo} />
-              <TaskTitle label="In Progress" bg={TASK_TYPE["in progress"]} />
-              <TaskTitle label="Completed" bg={TASK_TYPE.completed} />
+              <TaskTitle
+                label="ToDo"
+                bg={TASK_TYPE.todo}
+                setSelectedTask={setSelectedTask}
+              />
+              <TaskTitle
+                label="In Progress"
+                bg={TASK_TYPE["in progress"]}
+                setSelectedTask={setSelectedTask}
+              />
+              <TaskTitle
+                label="Completed"
+                bg={TASK_TYPE.completed}
+                setSelectedTask={setSelectedTask}
+              />
             </div>
           )}
           {selected === 0 ? (
-            <BoardView tasks={tasks} />
+            <BoardView tasks={tasks} currentTask={selectedTask} />
           ) : (
             <div>
               <Table tasks={tasks} />
             </div>
           )}
         </Tabs>
+        {open && <AddTask open={open} setOpen={setOpen} />}
       </div>
     </div>
   );

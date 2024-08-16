@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./TaskTitle.module.css";
 import { IoMdAdd } from "react-icons/io";
 
-function TaskTitle({ label, bg }) {
-  function onClickHandler() {}
+function TaskTitle({ label, bg, setSelectedTask }) {
+  function onClickHandler() {
+    setSelectedTask(label);
+  }
   return (
     <div className={styles.taskTitle}>
       <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>

@@ -34,7 +34,10 @@ function Notification() {
       <Popover className={styles.popover}>
         <Popover.Button className={styles.popoverBtn}>
           <div className={styles.notificationIconContainer}>
-            <IoIosNotificationsOutline className={styles.notificationIcon} />
+            <IoIosNotificationsOutline
+              className={styles.notificationIcon}
+              size={18}
+            />
           </div>
         </Popover.Button>
         <Transition

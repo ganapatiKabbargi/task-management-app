@@ -12,9 +12,10 @@
   gap: 4px;
   align-items: center;
   color: white;
-  border-radius: 8px;
-  padding: 8px 0px;
+  border-radius: 4px;
+  padding: 10px 12px;
   background-color: rgb(24 24 27);
+  font-size: 16px;
 }
 .taskTitleContainer {
   width: 100%;

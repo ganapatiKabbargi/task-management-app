@@ -1,0 +1,104 @@
+.formContainer {
+  max-width: 490px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 13%;
+  left: 40vw;
+  z-index: 20;
+}
+.form {
+  width: 100%;
+  box-sizing: border-box;
+}
+.title span {
+  font-size: 30px;
+  font-weight: 500;
+}
+.title {
+  border-bottom: 2px solid rgb(211, 211, 211);
+  margin-bottom: 20px;
+}
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.inputContainer input {
+  width: 180px;
+}
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(36, 48, 108);
+  display: block;
+  margin: 5px 0px;
+  text-transform: capitalize;
+}
+.input {
+  border: 1px solid rgb(36, 48, 108);
+  border-radius: 5px;
+  font-size: 18px;
+  color: rgb(36, 48, 108);
+  width: 95%;
+}
+.input:focus {
+  border: 2px solid rgb(36, 48, 108);
+}
+.selectContainer {
+  height: 100%;
+}
+.select {
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  border: 1px solid rgb(36, 48, 108);
+  font-size: 16px;
+}
+.select:focus {
+  border: 2px solid rgb(36, 48, 108);
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+  gap: 10px;
+}
+.submitBtn {
+  display: block;
+  width: 100%;
+  border: 1px solid #5a6ecf;
+  padding: 8px 12px;
+  transition: all 0.1s ease-in-out;
+}
+.cancelBtn {
+  display: block;
+  border: 1px solid #5a6ecf;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 4px;
+  transition: all 0.1s ease-in-out;
+}
+.submitBtn:hover {
+  background-color: #e4e7eb;
+}
+.cancelBtn:hover {
+  background-color: #e4e7eb;
+}
+
+@media screen and (max-width: 680px) {
+  .inputContainer {
+    flex-direction: column;
+    align-items: start;
+  }
+  .btnContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .formContainer {
+    left: 20vw;
+  }
+}
