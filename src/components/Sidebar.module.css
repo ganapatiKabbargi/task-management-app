@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 30px;
 }
 .heading {
@@ -51,7 +52,10 @@
   background-color: #2564ed;
   color: #fffdfd;
 }
-
+link {
+  display: flex;
+  align-items: center;
+}
 @media screen and (min-width: 1024px) {
   .link {
     width: 60%;

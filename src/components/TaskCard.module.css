@@ -1,0 +1,75 @@
+.taskCard {
+  width: 100%;
+  height: fit-content;
+  border-radius: 4px;
+  background-color: rgb(249, 249, 249);
+  box-sizing: border-box;
+  padding: 8px;
+}
+.priority {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1 1 0%;
+}
+.priorityIcon {
+  font-size: 14px;
+  line-height: 20px;
+}
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.container3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stage {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+}
+.title {
+  font-size: 16px;
+  font-weight: 500;
+}
+.date {
+  font-size: 14px;
+  color: rgb(75 85 99);
+}
+.container4 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0px 6px;
+}
+.activity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.message {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: medium;
+  color: rgb(75 85 99);
+}
+.team {
+  display: flex;
+}
+.member {
+  display: flex;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  color: white;
+  font-size: 14px;
+  margin-right: -4px;
+}

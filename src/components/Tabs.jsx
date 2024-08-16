@@ -25,9 +25,9 @@ function Tabs({ tabs, setSelected, children }) {
             );
           })}
         </Tab.List>
-        <Tab.Panel style={{ width: "100%", marginTop: "8px" }}>
+        <Tab.Panels style={{ width: "100%", marginTop: "8px" }}>
           {children}
-        </Tab.Panel>
+        </Tab.Panels>
       </Tab.Group>
     </div>
   );

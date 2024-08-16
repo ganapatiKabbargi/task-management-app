@@ -88,7 +88,7 @@ function TaskTable({ tasks }) {
 
   return (
     <div className={styles.tableContainer}>
-      <table style={{ width: "100%" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <TableHeader />
         <tbody>
           {tasks.map((task, id) => {

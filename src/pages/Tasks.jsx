@@ -8,6 +8,9 @@ import Button from "../components/Button";
 import { IoMdAdd } from "react-icons/io";
 import Tabs from "../components/Tabs";
 import TaskTitle from "../components/TaskTitle";
+import BoardView from "../components/BoardView";
+import { tasks } from "../utils/data";
+import Table from "../components/Table";
 const tabs = [
   { title: "Board View", icon: <MdGridView /> },
   { title: "List View", icon: <FaList /> },
@@ -21,7 +24,7 @@ const TASK_TYPE = {
 function Tasks() {
   const params = useParams();
   const status = params?.status || "";
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(0);
   return (
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
@@ -41,6 +44,13 @@ function Tasks() {
               <TaskTitle label="To Do" bg={TASK_TYPE.todo} />
               <TaskTitle label="In Progress" bg={TASK_TYPE["in progress"]} />
               <TaskTitle label="Completed" bg={TASK_TYPE.completed} />
+            </div>
+          )}
+          {selected === 0 ? (
+            <BoardView tasks={tasks} />
+          ) : (
+            <div>
+              <Table tasks={tasks} />
             </div>
           )}
         </Tabs>

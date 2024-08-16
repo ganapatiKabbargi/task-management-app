@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
 import MobileSidebar from "./components/MobileSidebar";
+import Trash from "./components/Trash";
 
 function Layout() {
   const navigate = useNavigate();
@@ -38,6 +39,11 @@ function App() {
           <Route index path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/completed/:status" element={<Tasks />} />
+          <Route path="/inprogress/:status" element={<Tasks />} />
+          <Route path="/todo/:status" element={<Tasks />} />
+          {/* <Route path="/team" element={<Users />} /> */}
+          <Route path="/trashed" element={<Trash />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

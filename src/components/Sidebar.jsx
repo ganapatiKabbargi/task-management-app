@@ -9,6 +9,7 @@ import {
 import { FaTasks, FaTrashAlt, FaUsers } from "react-icons/fa";
 import styles from "./Sidebar.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { IoMdSettings } from "react-icons/io";
 const linkData = [
   { label: "Dashboard", link: "dashboard", icon: <MdDashboard /> },
   { label: "Tasks", link: "tasks", icon: <FaTasks /> },
@@ -35,28 +36,42 @@ function Sidebar() {
   const sidebarLinks = user?.isAdmin ? linkData : linkData.slice(0, 5);
   return (
     <div className={styles.sidebar}>
-      <div className={styles.heading}>
-        <p>
-          <MdOutlineAddTask className={styles.addTask} />
-        </p>
-        <span>Task Manager</span>
+      <div>
+        <div className={styles.heading}>
+          <p>
+            <MdOutlineAddTask className={styles.addTask} />
+          </p>
+          <span>Task Manager</span>
+        </div>
+        <div className={styles.linksContainer}>
+          {sidebarLinks.map((el) => {
+            return (
+              <Link
+                to={el.link}
+                key={el.label}
+                onClick={closeHandler}
+                className={`${styles.link} ${
+                  path === el.link.split("/")[0] ? styles.active : ""
+                }`}
+              >
+                <span>{el.icon}</span>
+                <span>{el.label}</span>
+              </Link>
+            );
+          })}
+        </div>
       </div>
-      <div className={styles.linksContainer}>
-        {sidebarLinks.map((el) => {
-          return (
-            <Link
-              to={el.link}
-              key={el.label}
-              onClick={closeHandler}
-              className={`${styles.link} ${
-                path === el.link.split("/")[0] ? styles.active : ""
-              }`}
-            >
-              <span>{el.icon}</span>
-              <span>{el.label}</span>
-            </Link>
-          );
-        })}
+      <div style={{ padding: "10px 16px" }}>
+        <Link
+          to={"/setting"}
+          onClick={closeHandler}
+          className={`${styles.link} ${
+            path === "setting" ? styles.active : ""
+          }`}
+        >
+          <span>{<IoMdSettings size={16} />}</span>
+          <span style={{ marginBottom: "3px" }}>Settings</span>
+        </Link>
       </div>
     </div>
   );
