@@ -48,7 +48,7 @@ function UserDetail({ user }) {
                   </div>
                   <div>{user.name}</div>
                 </div>
-                <div className={styles.role}>{user.role}</div>
+                <div className={styles.role}>{user.title}</div>
                 <div className={styles.email}>{user.email}</div>
               </div>
             </div>

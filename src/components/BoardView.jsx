@@ -11,7 +11,7 @@ function BoardView({ tasks, currentTask }) {
   return (
     <div className={styles.board}>
       {currentTasks.map((task, i) => {
-        return <TaskCard task={task} />;
+        return <TaskCard task={task} key={i} />;
       })}
     </div>
   );

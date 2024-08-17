@@ -33,6 +33,7 @@
   right: 50px;
   max-width: 284px;
   width: 100vw;
+  z-index: 16;
 }
 .panel {
   display: flex;

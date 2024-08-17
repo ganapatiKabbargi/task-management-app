@@ -31,7 +31,7 @@ function Tasks() {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState("");
 
-  console.log(selectedTask);
+  // console.log(selectedTask);
 
   return (
     <div className={styles.container}>

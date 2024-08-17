@@ -1,13 +1,21 @@
 import React from "react";
+import ReactDom from "react-dom";
 import styles from "./Modal.module.css";
+
 function Modal({ setOpen }) {
+  const overlay = document.querySelector(".overlay");
   return (
-    <div
-      className={styles.wrapper}
-      onClick={() => {
-        setOpen(false);
-      }}
-    />
+    <>
+      {ReactDom.createPortal(
+        <div
+          className={styles.wrapper}
+          onClick={() => {
+            setOpen(false);
+          }}
+        />,
+        overlay
+      )}
+    </>
   );
 }
 
