@@ -113,6 +113,7 @@ form .createAccount:hover {
   background: #474bff;
   position: absolute;
   left: 50%;
+  z-index: 10;
   transform-origin: left;
   animation: spinner-16s03x 4s infinite;
 }

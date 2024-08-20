@@ -4,7 +4,21 @@ import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Menu, Transition } from "@headlessui/react";
 import styles from "./Avatar.module.css";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { useDispatch } from "react-redux";
+import { setUserCredentials } from "../store/authSlice";
 function Avatar() {
+  const dispatch = useDispatch();
+  function signOutHandler() {
+    signOut(auth)
+      .then(() => {
+        dispatch(setUserCredentials(null));
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  }
   return (
     <>
       <Menu as="div" className={styles.menu}>
@@ -47,6 +61,7 @@ function Avatar() {
                   <button
                     className={styles.menuItem_btn}
                     style={{ color: "#d22" }}
+                    onClick={signOutHandler}
                   >
                     <IoLogOutOutline
                       style={{ marginRight: "8px", color: "#d22" }}

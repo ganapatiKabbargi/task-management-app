@@ -9,10 +9,12 @@ import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
 import MobileSidebar from "./components/MobileSidebar";
 import Trash from "./components/Trash";
+import { useSelector } from "react-redux";
 
 function Layout() {
   const navigate = useNavigate();
-  let user = true;
+  let user = useSelector((state) => state.auth.user);
+  console.log(user);
   return user ? (
     <div className={styles.mainContainer}>
       <div className={styles.sidebar}>
@@ -27,7 +29,7 @@ function Layout() {
       </div>
     </div>
   ) : (
-    navigate("/login")
+    <Navigate to="/login" />
   );
 }
 
