@@ -8,6 +8,8 @@ import { setUserCredentials } from "../store/authSlice";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -46,12 +48,19 @@ function Login() {
     console.log(data);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
+        toast.success("logged in successfully", {
+          position: "top-center",
+          autoClose: 2000,
+          theme: "colored",
+        });
         reset();
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessaage = error.messaage;
-        console.log(errorMessaage);
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 2000,
+          theme: "colored",
+        });
       });
   }
   return (

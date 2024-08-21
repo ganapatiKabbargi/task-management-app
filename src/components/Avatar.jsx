@@ -8,12 +8,19 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useDispatch } from "react-redux";
 import { setUserCredentials } from "../store/authSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Avatar() {
   const dispatch = useDispatch();
   function signOutHandler() {
     signOut(auth)
       .then(() => {
         dispatch(setUserCredentials(null));
+        toast.info("Signed Out Successfully", {
+          position: "top-center",
+          autoClose: 2000,
+          theme: "colored",
+        });
       })
       .catch((error) => {
         // An error happened.
