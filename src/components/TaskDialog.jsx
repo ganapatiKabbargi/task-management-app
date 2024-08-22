@@ -16,7 +16,7 @@ import { deleteTask } from "../store/taskSlice";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { toast } from "react-toastify";
-function TaskDialog({ t }) {
+function TaskDialog({ selectedTask }) {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -27,17 +27,21 @@ function TaskDialog({ t }) {
 
   const duplicateHandler = () => {};
 
-  const deleteClicksHandler = () => {
-    console.log("delete handler called");
-    let newTasks = tasks.filter((task, i) => {
-      return task._id !== t._id;
-    });
-    dispatch(deleteTask(newTasks));
-    toast.success("task deleted successfully", { autoClose: 2000 });
-    const docRef = doc(db, "users", user.id);
-    setDoc(doc(docRef, `tasks/allTasks`), {
-      task: newTasks,
-    });
+  const deleteClicksHandler = async () => {
+    try {
+      let newTasks = tasks.filter((task) => {
+        return task._id !== selectedTask._id;
+      });
+
+      const docRef = doc(db, "users", user.id);
+      await setDoc(doc(docRef, `tasks/allTasks`), {
+        task: newTasks,
+      });
+      dispatch(deleteTask(newTasks));
+      toast.success("task deleted successfully", { autoClose: 2000 });
+    } catch (error) {
+      toast.error("Could'nt delete task properly", { autoClose: 2000 });
+    }
   };
 
   const items = [
@@ -118,7 +122,9 @@ function TaskDialog({ t }) {
           </Menu.Items>
         </Transition>
       </Menu>
-      {openEdit && <AddTask setOpen={setOpenEdit} />}
+      {openEdit && (
+        <AddTask setOpen={setOpenEdit} selectedTask={selectedTask} />
+      )}
     </>
   );
 }

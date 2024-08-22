@@ -9,9 +9,9 @@ import {
   MdList,
 } from "react-icons/md";
 import { BiMessageAltDetail } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
 import UserDetail from "./UserDetail";
 import TaskDialog from "./TaskDialog";
+
 function TaskCard({ task }) {
   const icons = {
     high: <MdKeyboardDoubleArrowUp />,
@@ -38,12 +38,7 @@ function TaskCard({ task }) {
               {task.priority} Priority
             </span>
           </div>
-          {/* <div className={styles.dots}>
-            <button className={styles.threeDots}>
-              <span>{<BsThreeDots />}</span>
-            </button>
-          </div> */}
-          <TaskDialog t={task} />
+          <TaskDialog selectedTask={task} />
         </div>
         <>
           <div className={styles.container3}>

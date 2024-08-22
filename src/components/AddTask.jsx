@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask } from "../store/taskSlice";
+import { addTask, updateTask } from "../store/taskSlice";
+import { toast } from "react-toastify";
 
-function AddTask({ open, setOpen }) {
+function AddTask({ open, setOpen, selectedTask }) {
   const user = useSelector((state) => state.auth.user);
   const tasks = useSelector((state) => state.task.tasks);
   const dispatch = useDispatch();
@@ -18,46 +19,70 @@ function AddTask({ open, setOpen }) {
     handleSubmit,
   } = useForm();
 
-  function submitHandler(data) {
-    let id = Date.now();
-    const taskData = {
-      ...data,
-      team: [
-        {
-          _id: "65c202d4aa62f32ffd1303cc",
-          name: "Codewave Asante",
-          title: "Administrator",
-          email: "admin@gmail.com",
-        },
-        {
-          _id: "65c30b96e639681a13def0b5",
-          name: "Jane Smith",
-          title: "Product Manager",
-          email: "jane.smith@example.com",
-        },
-        {
-          _id: "65c317360fd860f958baa08e",
-          name: "Alex Johnson",
-          title: "UX Designer",
-          email: "alex.johnson@example.com",
-        },
-      ],
-      createdAt: new Date().toLocaleTimeString(),
-      updatedAt: "",
-      isThrashed: false,
-      subTasks: [],
-      activities: [],
-      assets: [],
-      _id: id,
-    };
-    console.log(data);
-    const docRef = doc(db, "users", user.id);
-    setDoc(doc(docRef, `tasks/allTasks`), {
-      task: [...tasks, taskData],
-    });
-    dispatch(addTask([taskData]));
+  async function submitHandler(data) {
+    try {
+      if (selectedTask) {
+        const updatedTaskList = tasks.map((task) => {
+          if (task._id === selectedTask._id) {
+            return {
+              ...task,
+              ...data,
+            };
+          }
+          return task;
+        });
 
-    setOpen(false);
+        const docRef = doc(db, "users", user.id);
+        await setDoc(doc(docRef, `tasks/allTasks`), {
+          task: updatedTaskList,
+        });
+        dispatch(updateTask(updatedTaskList));
+        toast.success("Task Edited Successfully", { autoClose: 2000 });
+        setOpen(false);
+      } else {
+        const taskData = {
+          ...data,
+          team: [
+            {
+              _id: "65c202d4aa62f32ffd1303cc",
+              name: "Codewave Asante",
+              title: "Administrator",
+              email: "admin@gmail.com",
+            },
+            {
+              _id: "65c30b96e639681a13def0b5",
+              name: "Jane Smith",
+              title: "Product Manager",
+              email: "jane.smith@example.com",
+            },
+            {
+              _id: "65c317360fd860f958baa08e",
+              name: "Alex Johnson",
+              title: "UX Designer",
+              email: "alex.johnson@example.com",
+            },
+          ],
+          createdAt: new Date().toLocaleTimeString(),
+          updatedAt: "",
+          isThrashed: false,
+          subTasks: [],
+          activities: [],
+          assets: [],
+          _id: Date.now(),
+        };
+        console.log(data);
+
+        const docRef = doc(db, "users", user.id);
+        await setDoc(doc(docRef, `tasks/allTasks`), {
+          task: [...tasks, taskData],
+        });
+        dispatch(addTask([taskData]));
+        toast.success("Task added Successfully", { autoClose: 2000 });
+        setOpen(false);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
   return (
     <>
@@ -79,6 +104,7 @@ function AddTask({ open, setOpen }) {
               className={styles.input}
               {...register("title", { required: true })}
               aria-invalid={errors.firstName ? "true" : "false"}
+              // value={task ? task.title : ""}
             />
           </div>
           <div>
@@ -93,6 +119,7 @@ function AddTask({ open, setOpen }) {
                 id=""
                 className={styles.select}
                 {...register("stage")}
+                // value={task ? task.stage : ""}
               >
                 <option value="todo" className={styles.option}>
                   Todo
@@ -108,6 +135,7 @@ function AddTask({ open, setOpen }) {
                 type="date"
                 className={styles.input}
                 {...register("date", { required: true })}
+                // value={task ? task.date : ""}
               />
             </div>
           </div>
@@ -119,6 +147,7 @@ function AddTask({ open, setOpen }) {
                 id=""
                 className={styles.select}
                 {...register("priority")}
+                // value={task ? task.priority : ""}
               >
                 <option value="normal">Normal</option>
                 <option value="medium">Medium</option>
