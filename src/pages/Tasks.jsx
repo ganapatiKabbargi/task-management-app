@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdGridView } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import styles from "./Tasks.module.css";
@@ -9,9 +9,13 @@ import { IoMdAdd } from "react-icons/io";
 import Tabs from "../components/Tabs";
 import TaskTitle from "../components/TaskTitle";
 import BoardView from "../components/BoardView";
-import { tasks } from "../utils/data";
+// import { tasks } from "../utils/data";
 import Table from "../components/Table";
 import AddTask from "../components/AddTask";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, fetchTask } from "../store/taskSlice";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 const tabs = [
   { title: "Board View", icon: <MdGridView /> },
@@ -30,6 +34,35 @@ function Tasks() {
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const tasks = useSelector((state) => state.task.tasks);
+
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.auth.user?.id);
+  const taskRef = doc(db, "users", id);
+  const docRef = doc(taskRef, "tasks/allTasks");
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          dispatch(fetchTask(docSnap.data().task));
+          setIsLoading(false);
+        } else {
+          // docSnap.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      } catch {
+        (error) => {
+          console.log(error);
+        };
+      }
+    }
+    fetchData();
+  }, []);
 
   // console.log(selectedTask);
 

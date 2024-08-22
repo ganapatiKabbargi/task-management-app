@@ -6,9 +6,10 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { useDispatch } from "react-redux";
 import { setUserCredentials } from "../store/authSlice";
+import { doc, setDoc } from "firebase/firestore";
 
 function Register() {
   const navigate = useNavigate();
@@ -41,6 +42,17 @@ function Register() {
   function submitHandler(data) {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          setDoc(
+            doc(db, "users", user.uid),
+            {
+              email: user.email,
+              uid: user.uid,
+            },
+            { merge: true }
+          );
+        }
         reset();
         if (userCredential.user) {
           navigate("/login");

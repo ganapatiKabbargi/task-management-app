@@ -29,6 +29,7 @@ function Login() {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      console.log(user);
       dispatch(
         setUserCredentials({
           id: user.uid,

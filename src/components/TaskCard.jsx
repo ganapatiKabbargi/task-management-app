@@ -54,7 +54,7 @@ function TaskCard({ task }) {
 
             <div className={styles.title}>{task.title}</div>
           </div>
-          <span className={styles.date}>{task?.date.slice(0, 10)}</span>
+          <span className={styles.date}>{task?.date}</span>
         </>
         <hr />
         <div className={styles.container4}>

@@ -1,5 +1,5 @@
 import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -9,7 +9,10 @@ import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
 import MobileSidebar from "./components/MobileSidebar";
 import Trash from "./components/Trash";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase/firebase";
+import { addTask } from "./store/taskSlice";
 
 function Layout() {
   const navigate = useNavigate();
@@ -34,6 +37,32 @@ function Layout() {
 }
 
 function App() {
+  // const dispatch = useDispatch();
+  // const id = useSelector((state) => state.auth.user.id);
+
+  // useEffect(() => {
+  //   const taskRef = doc(db, "users", id);
+  //   const docRef = doc(taskRef, "tasks/allTasks");
+  //   async function fetchData() {
+  //     try {
+  //       const docSnap = await getDoc(docRef);
+
+  //       if (docSnap.exists()) {
+  //         console.log("Document data:", docSnap.data());
+  //         dispatch(addTask(docSnap.data().task));
+  //       } else {
+  //         // docSnap.data() will be undefined in this case
+  //         console.log("No such document!");
+  //       }
+  //     } catch {
+  //       (error) => {
+  //         console.log(error);
+  //       };
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+
   return (
     <main className={styles.main}>
       <Routes>

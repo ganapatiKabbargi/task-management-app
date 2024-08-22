@@ -3,8 +3,15 @@ import styles from "./AddTask.module.css";
 import Modal from "./Modal";
 import Button from "./Button";
 import { useForm } from "react-hook-form";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../store/taskSlice";
 
 function AddTask({ open, setOpen }) {
+  const user = useSelector((state) => state.auth.user);
+  const tasks = useSelector((state) => state.task.tasks);
+  const dispatch = useDispatch();
   const {
     register,
     formState: { errors },
@@ -12,7 +19,44 @@ function AddTask({ open, setOpen }) {
   } = useForm();
 
   function submitHandler(data) {
+    let id = Date.now();
+    const taskData = {
+      ...data,
+      team: [
+        {
+          _id: "65c202d4aa62f32ffd1303cc",
+          name: "Codewave Asante",
+          title: "Administrator",
+          email: "admin@gmail.com",
+        },
+        {
+          _id: "65c30b96e639681a13def0b5",
+          name: "Jane Smith",
+          title: "Product Manager",
+          email: "jane.smith@example.com",
+        },
+        {
+          _id: "65c317360fd860f958baa08e",
+          name: "Alex Johnson",
+          title: "UX Designer",
+          email: "alex.johnson@example.com",
+        },
+      ],
+      createdAt: new Date().toLocaleTimeString(),
+      updatedAt: "",
+      isThrashed: false,
+      subTasks: [],
+      activities: [],
+      assets: [],
+      _id: id,
+    };
     console.log(data);
+    const docRef = doc(db, "users", user.id);
+    setDoc(doc(docRef, `tasks/allTasks`), {
+      task: [...tasks, taskData],
+    });
+    dispatch(addTask([taskData]));
+
     setOpen(false);
   }
   return (
@@ -33,7 +77,7 @@ function AddTask({ open, setOpen }) {
             <input
               type="text"
               className={styles.input}
-              {...register("taskName", { required: true })}
+              {...register("title", { required: true })}
               aria-invalid={errors.firstName ? "true" : "false"}
             />
           </div>
@@ -48,7 +92,7 @@ function AddTask({ open, setOpen }) {
                 name="stage"
                 id=""
                 className={styles.select}
-                {...register("taskStage")}
+                {...register("stage")}
               >
                 <option value="todo" className={styles.option}>
                   Todo
@@ -63,7 +107,7 @@ function AddTask({ open, setOpen }) {
               <input
                 type="date"
                 className={styles.input}
-                {...register("taskDate", { required: true })}
+                {...register("date", { required: true })}
               />
             </div>
           </div>
@@ -76,9 +120,9 @@ function AddTask({ open, setOpen }) {
                 className={styles.select}
                 {...register("priority")}
               >
-                <option value="Normal">Normal</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="normal">Normal</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
               </select>
               {/* <input type="text" className={styles.input} /> */}
             </div>
