@@ -11,16 +11,34 @@ import { HiDuplicate } from "react-icons/hi";
 
 import { useNavigate } from "react-router-dom";
 import AddTask from "./AddTask";
-function TaskDialog() {
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTask } from "../store/taskSlice";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { toast } from "react-toastify";
+function TaskDialog({ t }) {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-
+  const tasks = useSelector((state) => state.task.tasks);
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const duplicateHandler = () => {};
 
-  const deleteClicksHandler = () => {};
+  const deleteClicksHandler = () => {
+    console.log("delete handler called");
+    let newTasks = tasks.filter((task, i) => {
+      return task._id !== t._id;
+    });
+    dispatch(deleteTask(newTasks));
+    toast.success("task deleted successfully", { autoClose: 2000 });
+    const docRef = doc(db, "users", user.id);
+    setDoc(doc(docRef, `tasks/allTasks`), {
+      task: newTasks,
+    });
+  };
 
   const items = [
     {

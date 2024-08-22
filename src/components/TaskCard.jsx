@@ -43,7 +43,7 @@ function TaskCard({ task }) {
               <span>{<BsThreeDots />}</span>
             </button>
           </div> */}
-          <TaskDialog />
+          <TaskDialog t={task} />
         </div>
         <>
           <div className={styles.container3}>
