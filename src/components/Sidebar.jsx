@@ -7,7 +7,8 @@ import {
   MdTaskAlt,
 } from "react-icons/md";
 import { FaTasks, FaTrashAlt, FaUsers } from "react-icons/fa";
-import styles from "./Sidebar.module.css";
+// import styles from "./Sidebar.module.css";
+import styles from "./SidebarDark.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
 const linkData = [
@@ -54,7 +55,7 @@ function Sidebar() {
                   path === el.link.split("/")[0] ? styles.active : ""
                 }`}
               >
-                <span>{el.icon}</span>
+                {el.icon}
                 <span>{el.label}</span>
               </Link>
             );
