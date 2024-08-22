@@ -64,52 +64,51 @@ function Login() {
         });
       });
   }
-  return (
-    <>
-      {isLoading && <Loader />}
-      <div className={styles.container}>
-        <div className={styles.title}>
-          <h1>Firebase based Task Manager</h1>
-          <div className={styles.spinner}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <div className={styles.subTitle}>
-            Manage all your tasks in one place
-          </div>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <div className={styles.container}>
+      <div className={styles.title}>
+        <h1>Firebase based Task Manager</h1>
+        <div className={styles.spinner}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <p className={styles.logo}>Welcome</p>
-          <input
-            type="text"
-            placeholder="Email"
-            required=""
-            {...register("email", { required: true })}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            required=""
-            {...register("password", { required: true })}
-          />
-          <button className={styles.login} type="submit">
-            Log In
-          </button>
-          <a href="#">Forgot Password ?</a>
-          <hr />
-          <button
-            className={styles.createAccount}
-            onClick={redirectToRegisterPage}
-            type="button"
-          >
-            Create New Account
-          </button>
-        </form>
+        <div className={styles.subTitle}>
+          Manage all your tasks in one place
+        </div>
       </div>
-    </>
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <p className={styles.logo}>Welcome</p>
+        <input
+          type="text"
+          placeholder="Email"
+          required=""
+          {...register("email", { required: true })}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          required=""
+          {...register("password", { required: true })}
+        />
+        <button className={styles.login} type="submit">
+          Log In
+        </button>
+        <a href="#">Forgot Password ?</a>
+        <hr />
+        <button
+          className={styles.createAccount}
+          onClick={redirectToRegisterPage}
+          type="button"
+        >
+          Create New Account
+        </button>
+      </form>
+    </div>
   );
 }
 

@@ -13,76 +13,91 @@ function AddTask({ open, setOpen, selectedTask }) {
   const user = useSelector((state) => state.auth.user);
   const tasks = useSelector((state) => state.task.tasks);
   const dispatch = useDispatch();
+
+  const defaultData = {
+    title: selectedTask?.title || "",
+    stage: selectedTask?.stage || "",
+    date: selectedTask?.date || "",
+    priority: selectedTask?.priority || "",
+  };
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ defaultValues: defaultData });
 
-  async function submitHandler(data) {
+  async function updateExsistingTask(data) {
     try {
-      if (selectedTask) {
-        const updatedTaskList = tasks.map((task) => {
-          if (task._id === selectedTask._id) {
-            return {
-              ...task,
-              ...data,
-            };
-          }
-          return task;
-        });
+      const updatedTaskList = tasks.map((task) => {
+        if (task._id === selectedTask._id) {
+          return {
+            ...task,
+            ...data,
+          };
+        }
+        return task;
+      });
 
-        const docRef = doc(db, "users", user.id);
-        await setDoc(doc(docRef, `tasks/allTasks`), {
-          task: updatedTaskList,
-        });
-        dispatch(updateTask(updatedTaskList));
-        toast.success("Task Edited Successfully", { autoClose: 2000 });
-        setOpen(false);
-      } else {
-        const taskData = {
-          ...data,
-          team: [
-            {
-              _id: "65c202d4aa62f32ffd1303cc",
-              name: "Codewave Asante",
-              title: "Administrator",
-              email: "admin@gmail.com",
-            },
-            {
-              _id: "65c30b96e639681a13def0b5",
-              name: "Jane Smith",
-              title: "Product Manager",
-              email: "jane.smith@example.com",
-            },
-            {
-              _id: "65c317360fd860f958baa08e",
-              name: "Alex Johnson",
-              title: "UX Designer",
-              email: "alex.johnson@example.com",
-            },
-          ],
-          createdAt: new Date().toLocaleTimeString(),
-          updatedAt: "",
-          isThrashed: false,
-          subTasks: [],
-          activities: [],
-          assets: [],
-          _id: Date.now(),
-        };
-        console.log(data);
-
-        const docRef = doc(db, "users", user.id);
-        await setDoc(doc(docRef, `tasks/allTasks`), {
-          task: [...tasks, taskData],
-        });
-        dispatch(addTask([taskData]));
-        toast.success("Task added Successfully", { autoClose: 2000 });
-        setOpen(false);
-      }
+      const docRef = doc(db, "users", user.id);
+      await setDoc(doc(docRef, `tasks/allTasks`), {
+        task: updatedTaskList,
+      });
+      dispatch(updateTask(updatedTaskList));
+      toast.success("Task Edited Successfully", { autoClose: 2000 });
+      setOpen(false);
     } catch (error) {
       toast.error(error.message);
     }
+  }
+
+  async function addNewTask(data) {
+    try {
+      const taskData = {
+        ...data,
+        team: [
+          {
+            _id: "65c202d4aa62f32ffd1303cc",
+            name: "Codewave Asante",
+            title: "Administrator",
+            email: "admin@gmail.com",
+          },
+          {
+            _id: "65c30b96e639681a13def0b5",
+            name: "Jane Smith",
+            title: "Product Manager",
+            email: "jane.smith@example.com",
+          },
+          {
+            _id: "65c317360fd860f958baa08e",
+            name: "Alex Johnson",
+            title: "UX Designer",
+            email: "alex.johnson@example.com",
+          },
+        ],
+        createdAt: new Date().toLocaleTimeString(),
+        updatedAt: "",
+        isThrashed: false,
+        subTasks: [],
+        activities: [],
+        assets: [],
+        _id: Date.now(),
+      };
+      console.log(data);
+
+      const docRef = doc(db, "users", user.id);
+      await setDoc(doc(docRef, `tasks/allTasks`), {
+        task: [...tasks, taskData],
+      });
+      dispatch(addTask([taskData]));
+      toast.success("Task added Successfully", { autoClose: 2000 });
+      setOpen(false);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  function submitHandler(data) {
+    selectedTask?._id ? updateExsistingTask(data) : addNewTask(data);
   }
   return (
     <>
@@ -104,7 +119,6 @@ function AddTask({ open, setOpen, selectedTask }) {
               className={styles.input}
               {...register("title", { required: true })}
               aria-invalid={errors.firstName ? "true" : "false"}
-              // value={task ? task.title : ""}
             />
           </div>
           <div>
@@ -119,7 +133,6 @@ function AddTask({ open, setOpen, selectedTask }) {
                 id=""
                 className={styles.select}
                 {...register("stage")}
-                // value={task ? task.stage : ""}
               >
                 <option value="todo" className={styles.option}>
                   Todo
@@ -127,7 +140,6 @@ function AddTask({ open, setOpen, selectedTask }) {
                 <option value="in progress">In Progress</option>
                 <option value="completed">completed</option>
               </select>
-              {/* <input type="text" className={styles.input} /> */}
             </div>
             <div>
               <label className={styles.label}>Task Date</label>
@@ -135,7 +147,6 @@ function AddTask({ open, setOpen, selectedTask }) {
                 type="date"
                 className={styles.input}
                 {...register("date", { required: true })}
-                // value={task ? task.date : ""}
               />
             </div>
           </div>
@@ -147,7 +158,6 @@ function AddTask({ open, setOpen, selectedTask }) {
                 id=""
                 className={styles.select}
                 {...register("priority")}
-                // value={task ? task.priority : ""}
               >
                 <option value="normal">Normal</option>
                 <option value="medium">Medium</option>

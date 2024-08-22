@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./BoardView.module.css";
 import TaskCard from "./TaskCard";
-function BoardView({ tasks, currentTask }) {
+import Loader from "./Loader";
+function BoardView({ tasks, currentTask, isLoading }) {
   // let currentTasks =
   //   currentTask !== ""
   //     ? tasks.filter((task, i) => {
@@ -9,11 +10,17 @@ function BoardView({ tasks, currentTask }) {
   //       })
   //     : tasks;
   return (
-    <div className={styles.board}>
-      {tasks.map((task, i) => {
-        return <TaskCard task={task} key={i} />;
-      })}
-    </div>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.board}>
+          {tasks.map((task, i) => {
+            return <TaskCard task={task} key={i} />;
+          })}
+        </div>
+      )}
+    </>
   );
 }
 

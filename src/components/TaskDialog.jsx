@@ -12,7 +12,7 @@ import { HiDuplicate } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import AddTask from "./AddTask";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTask } from "../store/taskSlice";
+import { addTask, deleteTask } from "../store/taskSlice";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { toast } from "react-toastify";
@@ -25,7 +25,19 @@ function TaskDialog({ selectedTask }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const duplicateHandler = () => {};
+  const duplicateHandler = async () => {
+    try {
+      let duplicatedTask = { ...selectedTask, _id: Date.now() };
+      const docRef = doc(db, "users", user.id);
+      await setDoc(doc(docRef, `tasks/allTasks`), {
+        task: [...tasks, duplicatedTask],
+      });
+      dispatch(addTask([duplicatedTask]));
+      toast.success("Task Duplicated Successfully", { autoClose: 2000 });
+    } catch (error) {
+      toast.error("Could'nt Duplicate Task Properly", { autoClose: 2000 });
+    }
+  };
 
   const deleteClicksHandler = async () => {
     try {

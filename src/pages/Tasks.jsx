@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTask, fetchTask } from "../store/taskSlice";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import Loader from "../components/Loader";
 
 const tabs = [
   { title: "Board View", icon: <MdGridView /> },
@@ -66,7 +67,9 @@ function Tasks() {
 
   // console.log(selectedTask);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
         <Title title={status ? `${status} Tasks` : "Tasks"} />
@@ -81,37 +84,47 @@ function Tasks() {
           />
         )}
       </div>
-      <div>
-        <Tabs tabs={tabs} setSelected={setSelected}>
-          {!status && (
-            <div className={styles.taskTitleContainer}>
-              <TaskTitle
-                label="ToDo"
-                bg={TASK_TYPE.todo}
-                setSelectedTask={setSelectedTask}
+      {tasks.length === 0 ? (
+        <div>
+          <h1>no tasks to show</h1>
+        </div>
+      ) : (
+        <div>
+          <Tabs tabs={tabs} setSelected={setSelected}>
+            {!status && (
+              <div className={styles.taskTitleContainer}>
+                <TaskTitle
+                  label="ToDo"
+                  bg={TASK_TYPE.todo}
+                  setSelectedTask={setSelectedTask}
+                />
+                <TaskTitle
+                  label="In Progress"
+                  bg={TASK_TYPE["in progress"]}
+                  setSelectedTask={setSelectedTask}
+                />
+                <TaskTitle
+                  label="Completed"
+                  bg={TASK_TYPE.completed}
+                  setSelectedTask={setSelectedTask}
+                />
+              </div>
+            )}
+            {selected === 0 ? (
+              <BoardView
+                tasks={tasks}
+                currentTask={selectedTask}
+                isLoading={isLoading}
               />
-              <TaskTitle
-                label="In Progress"
-                bg={TASK_TYPE["in progress"]}
-                setSelectedTask={setSelectedTask}
-              />
-              <TaskTitle
-                label="Completed"
-                bg={TASK_TYPE.completed}
-                setSelectedTask={setSelectedTask}
-              />
-            </div>
-          )}
-          {selected === 0 ? (
-            <BoardView tasks={tasks} currentTask={selectedTask} />
-          ) : (
-            <div>
-              <Table tasks={tasks} />
-            </div>
-          )}
-        </Tabs>
-        {open && <AddTask open={open} setOpen={setOpen} />}
-      </div>
+            ) : (
+              <div>
+                <Table tasks={tasks} />
+              </div>
+            )}
+          </Tabs>
+        </div>
+      )}
+      {open && <AddTask open={open} setOpen={setOpen} />}
     </div>
   );
 }
