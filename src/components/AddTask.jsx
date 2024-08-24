@@ -76,7 +76,7 @@ function AddTask({ open, setOpen, selectedTask }) {
         ],
         createdAt: new Date().toLocaleTimeString(),
         updatedAt: "",
-        isThrashed: false,
+        isTrashed: false,
         subTasks: [],
         activities: [],
         assets: [],

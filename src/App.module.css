@@ -10,7 +10,8 @@
   display: flex;
   flex-direction: column;
   /* background: #456; */
-  background-color: #cecdcd;
+  /* background-color: #cecdcd; */
+  background-color: #dddfe6;
 }
 .sidebar {
   width: 18%;
