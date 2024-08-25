@@ -41,8 +41,14 @@ function TaskDialog({ selectedTask }) {
 
   const deleteClicksHandler = async () => {
     try {
-      let newTasks = tasks.filter((task) => {
-        return task._id !== selectedTask._id;
+      let newTasks = tasks.map((task) => {
+        if (task._id === selectedTask._id) {
+          return {
+            ...task,
+            isTrashed: true,
+          };
+        }
+        return task;
       });
 
       const docRef = doc(db, "users", user.id);
@@ -50,7 +56,7 @@ function TaskDialog({ selectedTask }) {
         task: newTasks,
       });
       dispatch(deleteTask(newTasks));
-      toast.success("task deleted successfully", { autoClose: 2000 });
+      toast.success("task Added To The Recycle bin", { autoClose: 2000 });
     } catch (error) {
       toast.error("Could'nt delete task properly", { autoClose: 2000 });
     }

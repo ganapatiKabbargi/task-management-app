@@ -15,9 +15,13 @@ function BoardView({ tasks, currentTask, isLoading }) {
         <Loader />
       ) : (
         <div className={styles.board}>
-          {tasks.map((task, i) => {
-            return <TaskCard task={task} key={i} />;
-          })}
+          {tasks
+            .filter((task, i) => {
+              return task.isTrashed === false;
+            })
+            .map((task, i) => {
+              return <TaskCard task={task} key={i} />;
+            })}
         </div>
       )}
     </>

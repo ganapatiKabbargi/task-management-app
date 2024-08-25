@@ -8,7 +8,7 @@ function TrashBoard({ tasks }) {
       <div className={styles.board}>
         {tasks
           .filter((task, i) => {
-            return task.isTrashed === false;
+            return task.isTrashed === true;
           })
           .map((t, i) => {
             return <TrashCard task={t} key={i} />;
