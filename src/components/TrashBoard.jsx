@@ -3,16 +3,15 @@ import TrashCard from "./TrashCard";
 import styles from "./TrashBoard.module.css";
 
 function TrashBoard({ tasks }) {
+  let trashedTasks = tasks.filter((task, i) => {
+    return task.isTrashed === true;
+  });
   return (
     <>
       <div className={styles.board}>
-        {tasks
-          .filter((task, i) => {
-            return task.isTrashed === true;
-          })
-          .map((t, i) => {
-            return <TrashCard task={t} key={i} />;
-          })}
+        {trashedTasks.map((task, i) => {
+          return <TrashCard task={task} key={i} />;
+        })}
       </div>
     </>
   );

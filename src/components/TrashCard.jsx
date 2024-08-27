@@ -10,12 +10,43 @@ import {
 } from "react-icons/md";
 import { BiMessageAltDetail } from "react-icons/bi";
 import UserDetail from "./UserDetail";
+import { restoreTasks } from "../store/taskSlice";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 function TrashCard({ task }) {
   const icons = {
     high: <MdKeyboardDoubleArrowUp />,
     medium: <MdKeyboardArrowUp />,
     low: <MdKeyboardArrowDown />,
+  };
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.task.tasks);
+  const user = useSelector((state) => state.auth.user);
+
+  const restoreTaskHandler = async () => {
+    try {
+      let newTasks = tasks.map((t) => {
+        if (task._id === t._id) {
+          return {
+            ...task,
+            isTrashed: false,
+          };
+        }
+        return t;
+      });
+
+      const docRef = doc(db, "users", user.id);
+      await setDoc(doc(docRef, `tasks/allTasks`), {
+        task: newTasks,
+      });
+      dispatch(restoreTasks(newTasks));
+      toast.success("task restored successfully", { autoClose: 2000 });
+    } catch (error) {
+      toast.error("Could'nt restore task properly", { autoClose: 2000 });
+    }
   };
   return (
     <>
@@ -84,7 +115,9 @@ function TrashCard({ task }) {
           </div>
         </div>
         <div className={styles.btnContainer}>
-          <button className={styles.restoreBtn}>Restore</button>
+          <button className={styles.restoreBtn} onClick={restoreTaskHandler}>
+            Restore
+          </button>
           <button className={styles.deleteBtn}>Delete</button>
         </div>
         {/* {<SubTask/>} */}
