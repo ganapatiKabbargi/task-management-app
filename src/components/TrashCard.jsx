@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import { BiMessageAltDetail } from "react-icons/bi";
 import UserDetail from "./UserDetail";
-import { restoreTasks } from "../store/taskSlice";
+import { deleteTask, restoreTasks } from "../store/taskSlice";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
@@ -48,6 +48,26 @@ function TrashCard({ task }) {
       toast.error("Could'nt restore task properly", { autoClose: 2000 });
     }
   };
+
+  const deleteTaskHandler = async () => {
+    if (prompt("Are You Sure Want To Delete Task")) {
+      try {
+        let newTasks = tasks.filter((t) => {
+          return t._id !== task._id;
+        });
+
+        const docRef = doc(db, "users", user.id);
+        await setDoc(doc(docRef, `tasks/allTasks`), {
+          task: newTasks,
+        });
+        dispatch(deleteTask(newTasks));
+        toast.success("task deleted successfully", { autoClose: 2000 });
+      } catch (error) {
+        toast.error("Could'nt delete task properly", { autoClose: 2000 });
+      }
+    }
+  };
+
   return (
     <>
       <div className={styles.taskCard}>
@@ -118,7 +138,9 @@ function TrashCard({ task }) {
           <button className={styles.restoreBtn} onClick={restoreTaskHandler}>
             Restore
           </button>
-          <button className={styles.deleteBtn}>Delete</button>
+          <button className={styles.deleteBtn} onClick={deleteTaskHandler}>
+            Delete
+          </button>
         </div>
         {/* {<SubTask/>} */}
       </div>
