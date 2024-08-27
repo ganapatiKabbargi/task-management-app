@@ -6,6 +6,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  padding: 0px 30px;
 }
 .addTaskBtn {
   display: flex;

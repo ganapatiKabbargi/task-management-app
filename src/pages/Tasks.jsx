@@ -94,6 +94,11 @@ function Tasks() {
             {!status && (
               <div className={styles.taskTitleContainer}>
                 <TaskTitle
+                  label="All Tasks"
+                  bg={TASK_TYPE.todo}
+                  setSelectedTask={setSelectedTask}
+                />
+                <TaskTitle
                   label="ToDo"
                   bg={TASK_TYPE.todo}
                   setSelectedTask={setSelectedTask}
@@ -115,6 +120,7 @@ function Tasks() {
                 tasks={tasks}
                 currentTask={selectedTask}
                 isLoading={isLoading}
+                setOpen={setOpen}
               />
             ) : (
               <div>

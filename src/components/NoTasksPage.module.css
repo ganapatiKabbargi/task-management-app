@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+  margin: 30px;
+}
+
+.cookieHeading {
+  font-size: 2em;
+  font-weight: 800;
+  color: rgb(232, 133, 11);
+  /* border: 2px solid #ee1232; */
+}
+
+.cookieDescription {
+  text-align: center;
+  font-size: 1em;
+  font-weight: 600;
+  color: rgb(129, 128, 122);
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+}
+
+.acceptButton {
+  width: 80px;
+  height: 30px;
+  background-color: #f7ad37;
+  transition-duration: 0.2s;
+  border: none;
+  color: rgb(101, 84, 71);
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 20px;
+}
