@@ -32,8 +32,8 @@ function BoardView({ tasks, currentTask, isLoading, setOpen }) {
     <>
       {isLoading ? (
         <Loader />
-      ) : tasks.length === 0 ? (
-        <NoTasksPage setOpen={setOpen} />
+      ) : activeTasks.length === 0 ? (
+        <NoTasksPage setOpen={setOpen} btn={true} task={"Active"} />
       ) : (
         <div className={styles.board}>
           {currentTasks.map((task, i) => {
