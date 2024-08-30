@@ -94,7 +94,7 @@ function Tasks() {
             {!status && (
               <div className={styles.taskTitleContainer}>
                 <TaskTitle
-                  label="All Tasks"
+                  label="Active"
                   bg={TASK_TYPE.todo}
                   setSelectedTask={setSelectedTask}
                 />
@@ -124,7 +124,7 @@ function Tasks() {
               />
             ) : (
               <div>
-                <Table tasks={tasks} />
+                <Table tasks={tasks} currentTask={selectedTask} />
               </div>
             )}
           </Tabs>

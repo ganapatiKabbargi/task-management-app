@@ -44,6 +44,23 @@ function Trash() {
       }
     }
   };
+  const deleteAllHandler = async () => {
+    if (confirm("Are You Sure Want To Delete All Tasks")) {
+      try {
+        const tasksAfterDeleting = tasks.filter((task) => {
+          return task.isTrashed === false;
+        });
+        const docRef = doc(db, "users", user.id);
+        await setDoc(doc(docRef, `tasks/allTasks`), {
+          task: tasksAfterDeleting,
+        });
+        dispatch(updateTask(tasksAfterDeleting));
+        toast.success("All Tasks Deleted Successfully", { autoClose: 2000 });
+      } catch (error) {
+        toast.error("Could'nt Delete All Tasks Properly", { autoClose: 2000 });
+      }
+    }
+  };
   return (
     <div className={styles.tasksContainer}>
       <div className={styles.header}>
@@ -59,6 +76,7 @@ function Trash() {
             label={"Delete All"}
             icon={<MdDelete />}
             className={styles.delete}
+            onClick={deleteAllHandler}
           />
         </div>
       </div>

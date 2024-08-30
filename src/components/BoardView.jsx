@@ -14,7 +14,7 @@ function BoardView({ tasks, currentTask, isLoading, setOpen }) {
   let currentTasks;
   if (path[1] === "tasks") {
     currentTasks =
-      currentTask === "" || currentTask === "All Tasks"
+      currentTask === "" || currentTask === "Active"
         ? activeTasks
         : activeTasks.filter((task, i) => {
             return task.stage === currentTask.toLowerCase();
@@ -32,8 +32,12 @@ function BoardView({ tasks, currentTask, isLoading, setOpen }) {
     <>
       {isLoading ? (
         <Loader />
-      ) : activeTasks.length === 0 ? (
-        <NoTasksPage setOpen={setOpen} btn={true} task={"Active"} />
+      ) : currentTasks.length === 0 ? (
+        <NoTasksPage
+          setOpen={setOpen}
+          btn={true}
+          task={(currentTask || "") + " Tasks"}
+        />
       ) : (
         <div className={styles.board}>
           {currentTasks.map((task, i) => {

@@ -17,8 +17,32 @@ import UserDetail from "./UserDetail";
 import moment from "moment";
 import { BiMessageAltDetail } from "react-icons/bi";
 import Button from "./Button";
+import { useLocation } from "react-router-dom";
+import NoTasksPage from "./NoTasksPage";
 
-function Table({ tasks }) {
+function Table({ tasks, currentTask }) {
+  const location = useLocation();
+  const path = location.pathname.split("/");
+  console.log(path);
+  let activeTasks = tasks.filter((task, i) => {
+    return task.isTrashed === false;
+  });
+  let currentTasks;
+  if (path[1] === "tasks") {
+    currentTasks =
+      currentTask === "" || currentTask === "Active"
+        ? activeTasks
+        : activeTasks.filter((task, i) => {
+            return task.stage === currentTask.toLowerCase();
+          });
+  } else {
+    currentTasks =
+      path[1] === "tasks"
+        ? activeTasks
+        : activeTasks.filter((task, i) => {
+            return task.stage.split(" ").join("") === path[1];
+          });
+  }
   function editHandler(id) {}
   function deleteHandler(id) {}
 
@@ -143,10 +167,12 @@ function Table({ tasks }) {
     );
   }
 
-  return (
+  return currentTasks.length === 0 ? (
+    <NoTasksPage task={(currentTask || "") + " Tasks"} />
+  ) : (
     <div className={styles.tasksContainer}>
       <div className={styles.tasksTable}>
-        <TaskTable tasks={tasks} />
+        <TaskTable tasks={currentTasks} />
       </div>
     </div>
   );
