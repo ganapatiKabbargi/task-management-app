@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./Navbar.module.css";
 import { MdOutlineSearch } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { MdUpdate } from "react-icons/md";
+import { MdOutlineMessage } from "react-icons/md";
+import { CgMoveTask } from "react-icons/cg";
 import Avatar from "./Avatar";
 import { useDispatch } from "react-redux";
 import { openSideBar } from "../store/authSlice";
@@ -28,6 +31,10 @@ function Navbar() {
         </div>
       </div>
       <div className={styles.navbar_right}>
+        <div className={styles.btnContainer}>
+          <button className={styles.btn}>{<MdOutlineMessage />}</button>
+          <button className={styles.btn}>{<MdUpdate />}</button>
+        </div>
         <Notification />
         <Avatar />
       </div>

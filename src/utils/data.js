@@ -573,15 +573,18 @@ export const summary = {
 export const chartData = [
   {
     name: "High",
-    total: 2400,
+    total: 5,
+    fill: "rgb(220 38 38)",
   },
   {
     name: "Medium",
-    total: 2210,
+    total: 2,
+    fill: "rgb(202 138 4)",
   },
   {
     name: "Low",
-    total: 2290,
+    total: 3,
+    fill: "rgb(22 163 74)",
   },
 ];
 

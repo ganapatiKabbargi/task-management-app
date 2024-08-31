@@ -15,6 +15,7 @@ import Chart from "../components/Chart";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 import UserDetail from "../components/UserDetail";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 function TaskTable({ tasks }) {
   const icons = {
@@ -100,39 +101,60 @@ function TaskTable({ tasks }) {
   );
 }
 function Dashboard() {
-  const totals = summary.tasks;
+  const tasks = useSelector((state) => state.task.tasks);
+  const activeTasks = tasks.filter((task) => {
+    return task.isTrashed === false;
+  });
+  let total = {
+    todo: 0,
+    "in progress": 0,
+    completed: 0,
+  };
+  let totalTasks = 0;
+  activeTasks.forEach((task) => {
+    totalTasks++;
+    if (task.stage === "todo") {
+      total.todo++;
+    } else if (task.stage === "in progress") {
+      total["in progress"]++;
+    } else {
+      total.completed++;
+    }
+  });
+  // const totals = summary.tasks;
   const stats = [
     {
       _id: "1",
       label: "TOTAL TASK",
-      total: summary?.totalTasks || 0,
+      total: totalTasks || 0,
       icon: <FaNewspaper />,
       bg: "#1d4ed8",
     },
     {
       _id: "2",
       label: "COMPLTED TASK",
-      total: totals["completed"] || 0,
+      total: total["completed"] || 0,
       icon: <MdAdminPanelSettings />,
       bg: "#0f766e",
     },
     {
       _id: "3",
       label: "TASK IN PROGRESS ",
-      total: totals["in progress"] || 0,
+      total: total["in progress"] || 0,
       icon: <LuClipboardEdit />,
       bg: "#f59e0b",
     },
     {
       _id: "4",
       label: "TODOS",
-      total: totals["todo"],
+      total: total["todo"],
       icon: <FaArrowsToDot />,
       bg: "#be185d" || 0,
     },
   ];
   return (
     <div className={styles.dashboardContainer}>
+      <div className={styles.heading}>Dashboard</div>
       <div className={styles.dashboard}>
         {stats.map(({ total, icon, label, bg }, i) => {
           return (
@@ -146,7 +168,7 @@ function Dashboard() {
       </div>
       <div className={styles.tasksContainer}>
         <div className={styles.tasksTable}>
-          <TaskTable tasks={summary.last10Task} />
+          <TaskTable tasks={activeTasks} />
         </div>
       </div>
     </div>

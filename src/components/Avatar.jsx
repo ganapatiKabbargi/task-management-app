@@ -2,6 +2,9 @@ import React from "react";
 import { Fragment, useState } from "react";
 import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
+import { MdUpdate } from "react-icons/md";
+import { MdOutlineMessage } from "react-icons/md";
+import { CgMoveTask } from "react-icons/cg";
 import { Menu, Transition } from "@headlessui/react";
 import styles from "./Avatar.module.css";
 import { signOut } from "firebase/auth";
@@ -10,8 +13,10 @@ import { useDispatch } from "react-redux";
 import { setUserCredentials } from "../store/authSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 function Avatar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   function signOutHandler() {
     signOut(auth)
       .then(() => {
@@ -26,6 +31,7 @@ function Avatar() {
         // An error happened.
       });
   }
+
   return (
     <>
       <Menu as="div" className={styles.menu}>
@@ -43,7 +49,53 @@ function Avatar() {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className={styles.menu_items}>
-            <div style={{ padding: "10px" }}>
+            <div className={styles.account}>
+              <span>Account</span>
+            </div>
+            <div style={{ padding: "10px 0px" }}>
+              <Menu.Item>
+                {({ active }) => (
+                  <button className={styles.menuItem_btn}>
+                    <MdUpdate
+                      style={{ marginRight: "8px" }}
+                      area-hidden="true"
+                    />
+                    Updates
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button className={styles.menuItem_btn}>
+                    <MdOutlineMessage
+                      style={{ marginRight: "8px" }}
+                      area-hidden="true"
+                    />
+                    Messages
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={styles.menuItem_btn}
+                    onClick={() => {
+                      navigate("/tasks");
+                    }}
+                  >
+                    <CgMoveTask
+                      style={{ marginRight: "8px" }}
+                      area-hidden="true"
+                    />
+                    Tasks
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+            <div className={styles.settings}>
+              <span>Settings</span>
+            </div>
+            <div style={{ padding: "10px 0px" }}>
               <Menu.Item>
                 {({ active }) => (
                   <button className={styles.menuItem_btn}>

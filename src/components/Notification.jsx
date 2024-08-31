@@ -36,7 +36,7 @@ function Notification() {
           <div className={styles.notificationIconContainer}>
             <IoIosNotificationsOutline
               className={styles.notificationIcon}
-              size={18}
+              size={22}
             />
           </div>
         </Popover.Button>

@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 100vh;
   /* background-color: #8d929d; */
+  background-color: #ebecee;
 }
 
 .mainContainer {
@@ -11,7 +12,7 @@
   flex-direction: column;
   /* background: #456; */
   /* background-color: #cecdcd; */
-  background-color: #dddfe6;
+  /* background-color: #dddfe6; */
 }
 .sidebar {
   width: 18%;

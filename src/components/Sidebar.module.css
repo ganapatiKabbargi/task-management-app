@@ -5,12 +5,15 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 30px;
+
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .heading {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
+  padding: 1px 18px;
+  border-bottom: 1px solid rgb(152, 153, 152);
 }
 .heading span {
   max-width: 200px;

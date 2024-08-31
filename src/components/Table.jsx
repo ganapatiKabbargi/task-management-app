@@ -28,6 +28,7 @@ import { toast } from "react-toastify";
 
 function Table({ tasks, currentTask }) {
   const [openEdit, setOpenEdit] = useState(false);
+  const [Task, setSelectedTask] = useState({});
   const location = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -57,6 +58,10 @@ function Table({ tasks, currentTask }) {
   }
 
   function editHandler(id) {
+    const task = tasks.filter((t) => {
+      return t._id === id;
+    });
+    setSelectedTask(task);
     setOpenEdit(true);
   }
 

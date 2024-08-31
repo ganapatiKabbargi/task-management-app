@@ -4,6 +4,7 @@
   text-align: left;
   width: 40px;
   height: 40px;
+  padding: 0px 10px;
 }
 
 .menu_button {
@@ -57,4 +58,25 @@
 .menuItem_btn:hover {
   background: #93aed7;
   color: white;
+}
+.settings {
+  background-color: #dddfe3;
+  color: rgb(114, 113, 113);
+  padding: 8px 15px;
+}
+.settings span {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account {
+  background-color: #dddfe3;
+  color: rgb(114, 113, 113);
+  padding: 8px 15px;
+  border-radius: 8px 8px 0px 0px;
+}
+.account span {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
 }
