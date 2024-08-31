@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase";
 import { addTask } from "./store/taskSlice";
+import ForgotPassword from "./components/ForgotPassword";
 
 function Layout() {
   const navigate = useNavigate();
@@ -78,6 +79,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
       </Routes>
     </main>
   );

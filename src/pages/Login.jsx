@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
@@ -36,7 +36,7 @@ function Login() {
           email: user.email,
         })
       );
-      navigate("/");
+      navigate("/tasks");
     } else {
       dispatch(setUserCredentials(null));
     }
@@ -98,7 +98,7 @@ function Login() {
         <button className={styles.login} type="submit">
           Log In
         </button>
-        <a href="#">Forgot Password ?</a>
+        <Link to={"/forgotPassword"}>Forgot Password ?</Link>
         <hr />
         <button
           className={styles.createAccount}

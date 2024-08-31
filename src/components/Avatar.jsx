@@ -7,7 +7,7 @@ import { MdOutlineMessage } from "react-icons/md";
 import { CgMoveTask } from "react-icons/cg";
 import { Menu, Transition } from "@headlessui/react";
 import styles from "./Avatar.module.css";
-import { signOut } from "firebase/auth";
+import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useDispatch } from "react-redux";
 import { setUserCredentials } from "../store/authSlice";
@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 function Avatar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   function signOutHandler() {
     signOut(auth)
       .then(() => {
@@ -30,6 +31,22 @@ function Avatar() {
       .catch((error) => {
         // An error happened.
       });
+  }
+
+  async function passwordChangeHandler() {
+    const email = prompt("Enter email");
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast.success(
+        "Email Sent! Check your inbox for password reset instruction.",
+        { position: "top-center", autoClose: false }
+      );
+    } catch (error) {
+      toast.error("Could'nt reset password properly! try again", {
+        autoclose: 2000,
+        position: "top-center",
+      });
+    }
   }
 
   return (
@@ -106,7 +123,10 @@ function Avatar() {
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <button className={styles.menuItem_btn}>
+                  <button
+                    className={styles.menuItem_btn}
+                    onClick={passwordChangeHandler}
+                  >
                     <FaUserLock
                       style={{ marginRight: "8px" }}
                       area-hidden="true"

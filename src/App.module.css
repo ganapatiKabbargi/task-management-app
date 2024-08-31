@@ -23,12 +23,17 @@
   display: none;
 }
 .rightContainer {
-  /* position: relative; */
+  position: relative;
   flex: 1 1 0%;
   overflow-y: auto;
 }
 .outlet {
   padding: 0px 16px;
+  position: absolute;
+  top: 65px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 
 @media screen and (min-width: 768px) {
