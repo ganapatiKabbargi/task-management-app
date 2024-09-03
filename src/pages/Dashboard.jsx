@@ -11,7 +11,7 @@ import { FaArrowsToDot } from "react-icons/fa6";
 import styles from "./Dashboard.module.css";
 import { summary } from "../utils/data";
 import Card from "../components/Card";
-import Chart from "../components/Chart";
+import { PriorityChart } from "../components/Chart";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 import UserDetail from "../components/UserDetail";
 import moment from "moment";
@@ -164,7 +164,7 @@ function Dashboard() {
       </div>
       <div className={styles.chartContainer}>
         <h4 className={styles.chartHeading}>chart by Priority</h4>
-        <Chart />
+        <PriorityChart />
       </div>
       <div className={styles.tasksContainer}>
         <div className={styles.tasksTable}>

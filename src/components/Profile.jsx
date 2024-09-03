@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { setUserCredentials } from "../store/authSlice";
+import { DonutChart } from "./Chart";
 
 function Profile() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ function Profile() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const docRef = doc(db, "users", user.id);
+
   useEffect(() => {
     async function fetchUserDetail() {
       try {
@@ -32,6 +34,15 @@ function Profile() {
     }
     fetchUserDetail();
   }, []);
+
+  const tasks = useSelector((state) => state.task.tasks);
+  const activeTasks = tasks.filter((task) => {
+    return task.isTrashed === false;
+  });
+  let completedTasks = activeTasks.filter((task) => task.stage === "completed");
+  let inProgressTasks = activeTasks.filter(
+    (task) => task.stage !== "completed"
+  );
 
   return (
     <>
@@ -57,24 +68,39 @@ function Profile() {
           </div>
         </div>
         <div className={styles.greetcontainer}>
-          <div className={styles.greet}>
-            <span>{`Hello ${user["display name"] || "User"}`}</span>
+          <div
+            style={{ display: "flex", flexGrow: 1, flexDirection: "column" }}
+          >
+            <div className={styles.greet}>
+              <span>{`Hello ${user["display name"] || "User"}`}</span>
+            </div>
+            <div className={styles.description}>
+              <p>
+                This is your profile page. You can see the progress you've made
+                with your work and manage your projects or assigned tasks
+              </p>
+            </div>
+            <div className={styles.edit_profile}>
+              <button
+                className={styles.edit_profile_btn}
+                onClick={() => {
+                  setIsOpen(true);
+                }}
+              >
+                Edit Profile
+              </button>
+            </div>
           </div>
-          <div className={styles.description}>
-            <p>
-              This is your profile page. You can see the progress you've made
-              with your work and manage your projects or assigned tasks
-            </p>
-          </div>
-          <div className={styles.edit_profile}>
-            <button
-              className={styles.edit_profile_btn}
-              onClick={() => {
-                setIsOpen(true);
-              }}
-            >
-              Edit Profile
-            </button>
+          <div
+            style={{
+              // border: "2px solid #454",
+              // display: "flex",
+              // justifyContent: "center",
+              backgroundColor: "white",
+              borderRadius: "8px",
+            }}
+          >
+            <DonutChart />
           </div>
         </div>
         <div className={styles.user_detail_container}>
@@ -145,15 +171,19 @@ function Profile() {
             </div>
             <div className={styles.taskInfo}>
               <div className={styles.task}>
-                <span className={styles.task_count}>6</span>
+                <span className={styles.task_count}>{activeTasks.length}</span>
                 <span className={styles.task_title}>Total Tasks</span>
               </div>
               <div className={styles.task}>
-                <span className={styles.task_count}>4</span>
+                <span className={styles.task_count}>
+                  {completedTasks.length}
+                </span>
                 <span className={styles.task_title}>Completed</span>
               </div>
               <div className={styles.task}>
-                <span className={styles.task_count}>2</span>
+                <span className={styles.task_count}>
+                  {inProgressTasks.length}
+                </span>
                 <span className={styles.task_title}>In Progress</span>
               </div>
             </div>

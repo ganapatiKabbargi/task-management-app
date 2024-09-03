@@ -9,10 +9,11 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
+import { PieChart, Pie, Sector, Cell } from "recharts";
 // import { chartData } from "../utils/data";
 import { useSelector } from "react-redux";
 
-function Chart() {
+export function PriorityChart() {
   const tasks = useSelector((state) => state.task.tasks);
   const activeTasks = tasks.filter((task) => {
     return task.isTrashed === false;
@@ -67,4 +68,66 @@ function Chart() {
   );
 }
 
-export default Chart;
+export function DonutChart() {
+  const tasks = useSelector((state) => state.task.tasks);
+  const activeTasks = tasks.filter((task) => {
+    return task.isTrashed === false;
+  });
+  let completedTasks = activeTasks.filter((task) => task.stage === "completed");
+  let inProgressTasks = activeTasks.filter(
+    (task) => task.stage === "in progress"
+  );
+  let todoTasks = activeTasks.filter((task) => task.stage === "todo");
+
+  const data = [
+    { name: "Completed Tasks", value: completedTasks.length },
+    { name: "Todo Tasks", value: todoTasks.length },
+
+    { name: "In Progress Task", value: inProgressTasks.length },
+  ];
+  const COLORS = ["#00ae11", "#3e82db", " rgb(216, 159, 33)"];
+
+  return (
+    <ResponsiveContainer minWidth={260} width={400} height={260}>
+      <PieChart width={300} height={260}>
+        <Pie
+          data={data}
+          cx={"50%"}
+          cy={"50%"}
+          innerRadius={60}
+          outerRadius={80}
+          fill="#8884d8"
+          paddingAngle={8}
+          dataKey="value"
+          nameKey="name"
+          // label
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Legend />
+        {/* <Pie
+    data={data}
+    cx={420}
+    cy={200}
+    startAngle={180}
+    endAngle={0}
+    innerRadius={60}
+    outerRadius={80}
+    fill="#8884d8"
+    paddingAngle={5}
+    dataKey="value"
+  >
+    {data.map((entry, index) => (
+      <Cell
+        key={`cell-${index}`}
+        fill={COLORS[index % COLORS.length]}
+      />
+    ))}
+  </Pie> */}
+        <Tooltip />
+      </PieChart>
+    </ResponsiveContainer>
+  );
+}

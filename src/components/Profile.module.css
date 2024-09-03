@@ -41,6 +41,10 @@
 }
 .greetcontainer {
   padding: 16px 30px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  gap: 50px;
   /* border: 2px solid #454; */
 }
 .greet span {
@@ -49,7 +53,7 @@
   font-weight: 600;
 }
 .description p {
-  width: 500px;
+  max-width: 500px;
   font-size: 18px;
   font-weight: 300;
 }
@@ -95,6 +99,7 @@
 .user_detail_container {
   color: rgb(41, 42, 41);
   display: flex;
+  gap: 50px;
   align-items: center;
   justify-content: space-between;
 }
@@ -179,7 +184,7 @@
 }
 .adress {
   font-weight: 400;
-  color: #646464;
+  color: #3e82db;
 }
 .userAvatar {
   display: flex;
@@ -204,5 +209,8 @@
   .user_detail_container {
     flex-direction: column-reverse;
     gap: 30px;
+  }
+  .greetcontainer {
+    flex-direction: column;
   }
 }
