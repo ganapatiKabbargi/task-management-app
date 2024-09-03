@@ -14,6 +14,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase";
 import { addTask } from "./store/taskSlice";
 import ForgotPassword from "./components/ForgotPassword";
+import Profile from "./components/Profile";
 
 function Layout() {
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ function App() {
           <Route path="/todo/:status" element={<Tasks />} />
           {/* <Route path="/team" element={<Users />} /> */}
           <Route path="/trashed" element={<Trash />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

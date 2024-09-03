@@ -104,7 +104,7 @@ function TaskDialog({ selectedTask }) {
             <div style={{ padding: "10px" }}>
               {items.map((item, i) => {
                 return (
-                  <Menu.Item>
+                  <Menu.Item key={i}>
                     {({ active }) => (
                       <button
                         className={styles.menuItem_btn}

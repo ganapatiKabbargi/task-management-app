@@ -115,7 +115,12 @@ function Avatar() {
             <div style={{ padding: "10px 0px" }}>
               <Menu.Item>
                 {({ active }) => (
-                  <button className={styles.menuItem_btn}>
+                  <button
+                    className={styles.menuItem_btn}
+                    onClick={() => {
+                      navigate("/profile");
+                    }}
+                  >
                     <FaUser style={{ marginRight: "8px" }} area-hidden="true" />
                     Profile
                   </button>

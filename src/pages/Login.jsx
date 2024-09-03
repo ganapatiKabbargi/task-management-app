@@ -34,6 +34,8 @@ function Login() {
         setUserCredentials({
           id: user.uid,
           email: user.email,
+          "display name": user.displayName,
+          "profile picture": user.photoURL,
         })
       );
       navigate("/tasks");

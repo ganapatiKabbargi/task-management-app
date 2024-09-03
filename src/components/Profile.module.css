@@ -1,0 +1,208 @@
+.container {
+  background-color: rgba(30, 56, 112, 0.771);
+  color: white;
+  /* height: 600px; */
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 20px 0px;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+.logo {
+  /* border: 2px solid #454; */
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px;
+  text-transform: uppercase;
+}
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+.searchBox input {
+  outline: none;
+  border: 1px solid white;
+  border-radius: 9999px;
+  padding: 16px;
+  width: 300px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+}
+.searchBox input::placeholder {
+  color: white;
+}
+.greetcontainer {
+  padding: 16px 30px;
+  /* border: 2px solid #454; */
+}
+.greet span {
+  display: inline-block;
+  font-size: 40px;
+  font-weight: 600;
+}
+.description p {
+  width: 500px;
+  font-size: 18px;
+  font-weight: 300;
+}
+.edit_profile_btn {
+  border: none;
+  outline: none;
+  background-color: rgb(37, 56, 90);
+  display: inline-block;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 4px;
+}
+.user_info {
+  /* width: 650px; */
+  /* height: 520px; */
+  background-color: white;
+  border-radius: 8px;
+}
+.user_detail_container {
+  padding: 10px 30px;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+.my_account {
+  color: rgb(42, 43, 42);
+  font-size: 18px;
+  font-weight: 500;
+}
+.settings {
+  border: none;
+  outline: none;
+  background-color: rgb(61, 97, 159);
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.user_detail_container {
+  color: rgb(41, 42, 41);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user_info_container {
+  color: rgb(41, 42, 41);
+  padding: 10px 30px;
+}
+.user_information {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgb(97, 100, 97);
+}
+.user_information_container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.user_information_container p {
+  text-transform: capitalize;
+  font-weight: 600;
+  color: rgb(59, 61, 59);
+}
+.username {
+  border: 1px solid #453;
+  padding: 10px 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.profileCard {
+  width: 350px;
+  height: 520px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.profileImg {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 60px;
+}
+.profileImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 9999px;
+}
+.taskInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.task {
+  display: flex;
+  flex-direction: column;
+}
+.task_count {
+  font-size: 20px;
+  font-weight: 600;
+}
+.task_title {
+  color: rgb(162, 162, 162);
+  font-weight: 500;
+}
+.profile_name_container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.profile_name {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.adress {
+  font-weight: 400;
+  color: #646464;
+}
+.userAvatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.avatarImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+}
+@media screen and (max-width: 768px) {
+  .searchContainer {
+    display: none;
+  }
+  .user_information_container {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .user_detail_container {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+}

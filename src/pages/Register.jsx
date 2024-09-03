@@ -32,6 +32,8 @@ function Register() {
         setUserCredentials({
           id: user.uid,
           email: user.email,
+          "display name": user.displayName,
+          "profile picture": user.photoURL,
         })
       );
     } else {
