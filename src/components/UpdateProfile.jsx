@@ -4,9 +4,10 @@ import Modal from "./Modal";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { toast } from "react-toastify";
 import { setUserCredentials } from "../store/authSlice";
+import { doc, setDoc } from "firebase/firestore";
 
 function UpdateProfile({ setOpen }) {
   const user = useSelector((state) => state.auth.user);
@@ -30,10 +31,16 @@ function UpdateProfile({ setOpen }) {
     updateProfile(auth.currentUser, {
       displayName: data["display name"],
       photoURL: data["profile picture"],
-      phoneNumber: data["phone number"],
-      email: data.email,
     })
       .then(() => {
+        setDoc(doc(db, "users", user.id), {
+          email: user.email,
+          id: user.id,
+          "display name": data["display name"],
+          "profile picture": data["profile picture"],
+          "phone number": data["phone number"],
+          gender: data.gender,
+        });
         toast.success("Profile Updated Successfully...");
       })
       .catch((error) => {

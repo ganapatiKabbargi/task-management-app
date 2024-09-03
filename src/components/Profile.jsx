@@ -1,14 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import UpdateProfile from "./UpdateProfile";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { setUserCredentials } from "../store/authSlice";
 
 function Profile() {
   const [isOpen, setIsOpen] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const docRef = doc(db, "users", user.id);
+  useEffect(() => {
+    async function fetchUserDetail() {
+      try {
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          let data = docSnap.data();
+          dispatch(setUserCredentials(data));
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    fetchUserDetail();
+  }, []);
 
   return (
     <>
