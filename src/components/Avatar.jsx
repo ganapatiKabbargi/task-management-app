@@ -52,10 +52,11 @@ function Avatar() {
   return (
     <>
       <Menu as="div" className={styles.menu}>
+        <div className={styles.menuBtn_container}>
         <Menu.Button className={styles.menu_button}>
           <span>R</span>
         </Menu.Button>
-
+        </div>
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"

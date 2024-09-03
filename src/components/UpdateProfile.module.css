@@ -1,15 +1,26 @@
+.main_container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
 .container {
-  position: absolute;
-  max-width: 500px;
-  width: 100%;
+  position: fixed;
+  width: 500px;
   background: #fcfbfa;
-  padding: 25px;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   /* left: 200px; */
-  top: 100px;
-  left: 500px;
-  z-index: 20;
+  top: 10%;
+  left: 36%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .container header {
@@ -20,14 +31,14 @@
 }
 
 .container .form {
-  margin-top: 15px;
   background-color: transparent;
-  width: 450px;
+  width: 95%;
   box-shadow: none;
+  border: 1px solid #454;
 }
 
 .form .input_box {
-  width: 100%;
+  width: 90%;
   margin-top: 10px;
 }
 
@@ -36,12 +47,11 @@
 }
 
 .form :where(.input_box input, .select_box) {
-  position: relative;
   height: 35px;
-  width: 100%;
+  width: 90%;
   outline: none;
   font-size: 1rem;
-  color: #808080;
+  color: #1b1a1a;
   margin-top: 5px;
   border: 1px solid #ee4e34;
   border-radius: 6px;
@@ -53,22 +63,19 @@
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.form .column {
-  display: flex;
-  justify-content: space-around;
-  gap: 15px;
-}
-
 .form .gender_box {
   margin-top: 10px;
+  width: 90%;
+  color: #101010;
 }
 
-.form :where(.gender_option, .gender) {
+.form :where(.gender_option) {
   display: flex;
   align-items: center;
-  column-gap: 50px;
+  gap: 20px;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .form .gender {
@@ -85,20 +92,6 @@
 
 .gender label {
   color: #000;
-}
-
-.address :where(input, .select_box) {
-  margin-top: 10px;
-}
-
-.select_box select {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: none;
-  color: #808080;
-  font-size: 1rem;
-  background: #fcedda;
 }
 
 .form button {
@@ -118,5 +111,12 @@
 .form button:hover {
   background: #ee3e34;
 }
-
-
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 300px;
+    left: 10%;
+  }
+  .container .form {
+    max-width: 300px;
+  }
+}

@@ -7,12 +7,9 @@
   padding: 0px 8px;
   background-color: white;
   border-radius: 4px;
-  box-shadow: 0 10px 15px 3px rgb(0 0 0 / 0.1), 0 4px 6px 4px rgb(0 0 0 / 0.1);
+  /* box-shadow: 0 10px 15px 3px rgb(0 0 0 / 0.1), 0 4px 6px 4px rgb(0 0 0 / 0.1); */
 }
-/* .taskTitle:hover {
-  position: relative;
-  bottom: 5px;
-} */
+
 .taskTitleItems {
   width: 16px;
   height: 16px;
@@ -43,8 +40,5 @@
   }
   .label {
     font-size: 14px;
-  }
-  .btn {
-    display: none;
   }
 }

@@ -202,8 +202,8 @@ function Profile() {
             </div>
           </div>
         </div>
+        {isOpen && <UpdateProfile setOpen={setIsOpen} />}
       </div>
-      {isOpen && <UpdateProfile setOpen={setIsOpen} />}
     </>
   );
 }

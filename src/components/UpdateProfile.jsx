@@ -59,29 +59,30 @@ function UpdateProfile({ setOpen }) {
 
   return (
     <>
-      <Modal setOpen={setOpen} />
-      <section className={styles.container}>
-        <header>Update Profile</header>
-        <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
-          <div className={styles.input_box}>
-            <label>Full Name</label>
-            <input
-              required=""
-              placeholder="Enter full name"
-              type="text"
-              {...register("display name")}
-            />
-          </div>
-          <div className={styles.input_box}>
-            <label>Email</label>
-            <input
-              required=""
-              placeholder="Enter Email"
-              type="email"
-              {...register("email")}
-            />
-          </div>
-          <div className={styles.column}>
+      <div className={styles.main_container}>
+        <Modal setOpen={setOpen} />
+        <section className={styles.container}>
+          <header>Update Profile</header>
+          <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
+            <div className={styles.input_box}>
+              <label>Full Name</label>
+              <input
+                required=""
+                placeholder="Enter full name"
+                type="text"
+                {...register("display name")}
+              />
+            </div>
+            <div className={styles.input_box}>
+              <label>Email</label>
+              <input
+                required=""
+                placeholder="Enter Email"
+                type="email"
+                {...register("email")}
+              />
+            </div>
+
             <div className={styles.input_box}>
               <label>Phone Number</label>
               <input
@@ -91,54 +92,55 @@ function UpdateProfile({ setOpen }) {
                 {...register("phone number")}
               />
             </div>
-          </div>
-          <div className={styles.gender_box}>
-            <label>Gender</label>
-            <div className={styles.gender_option}>
-              <div className={styles.gender}>
-                <input
-                  name="gender"
-                  id="check-male"
-                  type="radio"
-                  value={"Male"}
-                  {...register("gender")}
-                />
-                <label htmlFor="check-male">Male</label>
-              </div>
-              <div className={styles.gender}>
-                <input
-                  name="gender"
-                  id="check-female"
-                  type="radio"
-                  value={"Female"}
-                  {...register("gender")}
-                />
-                <label htmlFor="check-female">Female</label>
-              </div>
-              <div className={styles.gender}>
-                <input
-                  name="gender"
-                  id="check-other"
-                  type="radio"
-                  value={"Prefer not to say"}
-                  {...register("gender")}
-                />
-                <label htmlFor="check-other">Prefer not to say</label>
+
+            <div className={styles.gender_box}>
+              <label>Gender</label>
+              <div className={styles.gender_option}>
+                <div className={styles.gender}>
+                  <input
+                    name="gender"
+                    id="check-male"
+                    type="radio"
+                    value={"Male"}
+                    {...register("gender")}
+                  />
+                  <label htmlFor="check-male">Male</label>
+                </div>
+                <div className={styles.gender}>
+                  <input
+                    name="gender"
+                    id="check-female"
+                    type="radio"
+                    value={"Female"}
+                    {...register("gender")}
+                  />
+                  <label htmlFor="check-female">Female</label>
+                </div>
+                <div className={styles.gender}>
+                  <input
+                    name="gender"
+                    id="check-other"
+                    type="radio"
+                    value={"Prefer not to say"}
+                    {...register("gender")}
+                  />
+                  <label htmlFor="check-other">Prefer not to say</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={`${styles.input_box} ${styles.address}`}>
-            <label> Profile Picture</label>
-            <input
-              required=""
-              placeholder="Enter street address"
-              type="text"
-              {...register("profile picture")}
-            />
-          </div>
-          <button>Submit</button>
-        </form>
-      </section>
+            <div className={styles.input_box}>
+              <label> Profile Picture</label>
+              <input
+                required=""
+                placeholder="Enter street address"
+                type="text"
+                {...register("profile picture")}
+              />
+            </div>
+            <button>Submit</button>
+          </form>
+        </section>
+      </div>
     </>
   );
 }

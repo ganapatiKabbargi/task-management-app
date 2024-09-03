@@ -11,6 +11,8 @@ import styles from "./Sidebar.module.css";
 // import styles from "./SidebarDark.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { closeSideBar } from "../store/authSlice";
 const linkData = [
   { label: "Dashboard", link: "dashboard", icon: <MdDashboard /> },
   { label: "Tasks", link: "tasks", icon: <FaTasks /> },
@@ -25,16 +27,22 @@ const linkData = [
   { label: "Trash", link: "trashed", icon: <FaTrashAlt /> },
 ];
 
-function closeHandler() {}
+function Sidebar({ closeHandler }) {
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-function Sidebar() {
   let user = {
     id: "uid",
     isAdmin: true,
   };
-  const location = useLocation();
+
   const path = location.pathname.split("/")[1];
   const sidebarLinks = user?.isAdmin ? linkData : linkData.slice(0, 5);
+
+  function closeHandler() {
+    dispatch(closeSideBar());
+  }
+
   return (
     <div className={styles.sidebar}>
       <div>

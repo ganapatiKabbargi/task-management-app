@@ -16,6 +16,9 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  width: 600px;
+  max-width: 600px;
+  /* border: 1px solid rgb(76, 154, 76); */
 }
 
 .hamberger {
@@ -25,14 +28,13 @@
   cursor: pointer;
   text-align: center;
   padding: 10px;
-  display: block;
+  display: none;
 }
 .hamberger:focus {
   outline: none;
 }
 .searchContainer {
-  min-width: 160px;
-
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 8px 12px;
@@ -46,6 +48,8 @@
   /* background-color: #eff0f1; */
   color: #4f4e4e;
   border: none;
+  display: inline-block;
+  width: 100px;
 }
 
 .searchIcon {
@@ -85,11 +89,11 @@
   margin-right: 10px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .hamberger {
-    display: none;
+    display: block;
   }
-  .searchContainer {
-    width: 600px;
+  .btnContainer {
+    display: none;
   }
 }
