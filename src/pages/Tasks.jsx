@@ -17,6 +17,7 @@ import { addTask, fetchTask } from "../store/taskSlice";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Loader from "../components/Loader";
+import NoTasksPage from "../components/NoTasksPage";
 
 const tabs = [
   { title: "Board View", icon: <MdGridView /> },
@@ -35,41 +36,39 @@ function Tasks() {
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const tasks = useSelector((state) => state.task.tasks);
 
-  const dispatch = useDispatch();
-  const id = useSelector((state) => state.auth.user?.id);
-  const taskRef = doc(db, "users", id);
-  const docRef = doc(taskRef, "tasks/allTasks");
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      try {
-        const docSnap = await getDoc(docRef);
+  // const dispatch = useDispatch();
+  // const id = useSelector((state) => state.auth.user?.id);
+  // const taskRef = doc(db, "users", id);
+  // const docRef = doc(taskRef, "tasks/allTasks");
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setIsLoading(true);
+  //     try {
+  //       const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
-          dispatch(fetchTask(docSnap.data().task));
-          setIsLoading(false);
-        } else {
-          // docSnap.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      } catch {
-        (error) => {
-          console.log(error);
-        };
-      }
-    }
-    fetchData();
-  }, []);
+  //       if (docSnap.exists()) {
+  //         console.log("Document data:", docSnap.data());
+  //         dispatch(fetchTask(docSnap.data().task));
+  //         setIsLoading(false);
+  //       } else {
+  //         // docSnap.data() will be undefined in this case
+  //         console.log("No such document!");
+  //       }
+  //     } catch {
+  //       (error) => {
+  //         console.log(error);
+  //       };
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   // console.log(selectedTask);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
         <Title title={status ? `${status} Tasks` : "Tasks"} />
@@ -86,7 +85,13 @@ function Tasks() {
       </div>
       {tasks.length === 0 ? (
         <div>
-          <h1>no tasks to show</h1>
+          <NoTasksPage
+            task={"Active Tasks"}
+            btn={true}
+            setOpen={() => {
+              setOpen(true);
+            }}
+          />
         </div>
       ) : (
         <div>
@@ -119,7 +124,7 @@ function Tasks() {
               <BoardView
                 tasks={tasks}
                 currentTask={selectedTask}
-                isLoading={isLoading}
+                // isLoading={isLoading}
                 setOpen={setOpen}
               />
             ) : (

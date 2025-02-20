@@ -30,9 +30,7 @@ function BoardView({ tasks, currentTask, isLoading, setOpen }) {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : currentTasks.length === 0 ? (
+      {currentTasks.length === 0 ? (
         <NoTasksPage
           setOpen={setOpen}
           btn={true}

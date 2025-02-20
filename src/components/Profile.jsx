@@ -11,7 +11,6 @@ import { DonutChart } from "./Chart";
 
 function Profile() {
   const [isOpen, setIsOpen] = useState(false);
-
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const docRef = doc(db, "users", user.id);
@@ -32,11 +31,13 @@ function Profile() {
         console.log(error.message);
       }
     }
-    fetchUserDetail();
+    setTimeout(() => {
+      fetchUserDetail();
+    }, 1000);
   }, []);
 
   const tasks = useSelector((state) => state.task.tasks);
-  const activeTasks = tasks.filter((task) => {
+  const activeTasks = tasks?.filter((task) => {
     return task.isTrashed === false;
   });
   let completedTasks = activeTasks.filter((task) => task.stage === "completed");
@@ -100,7 +101,23 @@ function Profile() {
               borderRadius: "8px",
             }}
           >
-            <DonutChart />
+            {activeTasks.length !== 0 ? (
+              <DonutChart />
+            ) : (
+              <p
+                style={{
+                  width: "400px",
+                  height: "180px",
+                  color: "#222",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "18px",
+                }}
+              >
+                No Data Available
+              </p>
+            )}
           </div>
         </div>
         <div className={styles.user_detail_container}>

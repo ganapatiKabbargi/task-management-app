@@ -50,7 +50,9 @@ function Register() {
             doc(db, "users", user.uid),
             {
               email: user.email,
-              uid: user.uid,
+              id: user.uid,
+              "display name": user.displayName,
+              "profile picture": user.photoURL,
             },
             { merge: true }
           );

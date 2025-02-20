@@ -50,6 +50,8 @@ function UpdateProfile({ setOpen }) {
     dispatch(
       setUserCredentials({
         ...user,
+        "display name": data["display name"],
+        "profile picture": data["profile picture"],
         "phone number": data["phone number"],
         gender: data.gender,
       })

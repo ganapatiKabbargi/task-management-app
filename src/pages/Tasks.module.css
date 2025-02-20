@@ -19,10 +19,10 @@
   font-size: 16px;
 }
 .taskTitleContainer {
-  width: 100%;
+  width: 90%;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: 30px;
   padding: 16px 0px;
 }
 @media screen and (max-width: 768px) {

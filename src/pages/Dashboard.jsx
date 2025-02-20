@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdAdminPanelSettings,
   MdKeyboardArrowDown,
@@ -15,7 +15,11 @@ import { PriorityChart } from "../components/Chart";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 import UserDetail from "../components/UserDetail";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { fetchTask } from "../store/taskSlice";
+import Loader from "../components/Loader";
 
 function TaskTable({ tasks }) {
   const icons = {
@@ -101,6 +105,33 @@ function TaskTable({ tasks }) {
   );
 }
 function Dashboard() {
+  const dispatch = useDispatch();
+  // const id = useSelector((state) => state.auth.user?.id);
+  // const taskRef = doc(db, "users", id);
+  // const docRef = doc(taskRef, "tasks/allTasks");
+  // const [isLoading, setIsLoading] = useState(false);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setIsLoading(true);
+  //     try {
+  //       const docSnap = await getDoc(docRef);
+
+  //       if (docSnap.exists()) {
+  //         console.log("Document data:", docSnap.data());
+  //         dispatch(fetchTask(docSnap.data().task));
+  //         setIsLoading(false);
+  //       } else {
+  //         // docSnap.data() will be undefined in this case
+  //         console.log("No such document!");
+  //       }
+  //     } catch {
+  //       (error) => {
+  //         console.log(error);
+  //       };
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
   const tasks = useSelector((state) => state.task.tasks);
   const activeTasks = tasks.filter((task) => {
     return task.isTrashed === false;
@@ -164,11 +195,17 @@ function Dashboard() {
       </div>
       <div className={styles.chartContainer}>
         <h4 className={styles.chartHeading}>chart by Priority</h4>
-        <PriorityChart />
+        {activeTasks.length !== 0 ? (
+          <PriorityChart />
+        ) : (
+          <h3 style={{ textAlign: "center" }}>
+            No data to show, Add task to see the chart
+          </h3>
+        )}
       </div>
       <div className={styles.tasksContainer}>
         <div className={styles.tasksTable}>
-          <TaskTable tasks={activeTasks} />
+          {activeTasks.length !== 0 && <TaskTable tasks={activeTasks} />}
         </div>
       </div>
     </div>
